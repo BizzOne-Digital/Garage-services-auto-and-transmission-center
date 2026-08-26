@@ -35,13 +35,14 @@ export const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           <div className="absolute inset-0 bg-grid-pattern opacity-20" />
 
           {/* Center Brand animation container */}
-          <div className="relative z-10 flex flex-col items-center">
+          <div className="relative z-10 flex flex-col items-center px-4 text-center">
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="flex flex-col items-center"
             >
-              <Logo size="lg" showTagline={false} />
+              <Logo size="xl" showTagline={true} />
             </motion.div>
 
             {/* Automotive yellow precision sweep line */}
@@ -62,9 +63,9 @@ export const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.4 }}
-              className="text-[11px] font-mono tracking-widest text-neutral-500 uppercase mt-3"
+              className="text-[11px] font-mono tracking-widest text-[#F5C400] uppercase mt-3"
             >
-              Initializing Diagnostic Systems...
+              Initializing Diagnostic Bay...
             </motion.p>
           </div>
         </motion.div>

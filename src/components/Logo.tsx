@@ -1,37 +1,58 @@
 import React from 'react';
+import { BUSINESS_INFO } from '../lib/constants';
 
 interface LogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   showTagline?: boolean;
+  imageOnly?: boolean;
 }
 
-export const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', showTagline = false }) => {
-  const iconSizes = {
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10',
-    lg: 'w-12 h-12',
-  };
-
-  const innerSizes = {
-    sm: 'w-4 h-4',
-    md: 'w-6 h-6',
-    lg: 'w-7 h-7',
+export const Logo: React.FC<LogoProps> = ({
+  className = '',
+  size = 'md',
+  showTagline = false,
+  imageOnly = false,
+}) => {
+  const containerSizes = {
+    sm: 'w-9 h-9',
+    md: 'w-11 h-11',
+    lg: 'w-14 h-14',
+    xl: 'w-24 h-24 sm:w-28 sm:h-28',
   };
 
   const titleSizes = {
-    sm: 'text-base font-black tracking-tighter',
-    md: 'text-xl font-black tracking-tighter',
-    lg: 'text-2xl font-black tracking-tighter',
+    sm: 'text-sm sm:text-base font-black tracking-tight',
+    md: 'text-base sm:text-lg lg:text-xl font-black tracking-tight',
+    lg: 'text-xl sm:text-2xl font-black tracking-tight',
+    xl: 'text-2xl sm:text-3xl font-black tracking-tight',
   };
 
-  return (
-    <div className={`flex items-center gap-3.5 select-none ${className}`}>
-      {/* Brand Icon Emblem - Artistic Rotated Diamond Symbol */}
-      <div className={`${iconSizes[size]} bg-[#F5C400] flex items-center justify-center rounded-sm rotate-45 shrink-0 shadow-lg shadow-[#F5C400]/20 transition-transform duration-300 group-hover:rotate-[225deg]`}>
-        <div className={`${innerSizes[size]} border-2 border-black -rotate-45 flex items-center justify-center`}>
-          <div className="w-1.5 h-1.5 bg-black rounded-full" />
+  if (imageOnly) {
+    return (
+      <div className={`relative flex items-center justify-center ${className}`}>
+        <div className={`relative ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F5C400] shadow-xl flex items-center justify-center p-0.5 group`}>
+          <img
+            src={BUSINESS_INFO.logoUrl}
+            alt="Garage Services Auto and Transmission Center Official Logo"
+            className="w-full h-full object-cover object-center rounded-full scale-[1.04]"
+            referrerPolicy="no-referrer"
+          />
         </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`flex items-center gap-3 sm:gap-3.5 select-none ${className}`}>
+      {/* Official Brand Emblem Image - Perfect Circle without corners */}
+      <div className={`relative shrink-0 ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F5C400] shadow-md hover:scale-105 transition-transform duration-300 flex items-center justify-center p-0.5`}>
+        <img
+          src={BUSINESS_INFO.logoUrl}
+          alt="Garage Services Auto and Transmission Center Emblem"
+          className="w-full h-full object-cover object-center rounded-full scale-[1.04]"
+          referrerPolicy="no-referrer"
+        />
       </div>
 
       {/* Brand Typography */}
@@ -51,3 +72,5 @@ export const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', showTag
     </div>
   );
 };
+
+

@@ -12,6 +12,7 @@ export const BUSINESS_INFO = {
   socialMediaName: "garage services auto and transmission center",
   locationNotice: "Serving Montreal & Greater Metropolitan Area. Mobile consultations and shop intake available.",
   yearsServingNotice: "Dedicated automotive craftsmanship & transmission diagnostic excellence.",
+  logoUrl: "https://res.cloudinary.com/dobtsjhb2/image/upload/v1787785423/image_cx6qfr.png",
 };
 
 export const TRUST_PILLARS: TrustPillar[] = [
