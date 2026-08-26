@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+    --color-brand-yellow: #F5C400;
+    --color-brand-yellow-hover: #E5B700;
+    --color-brand-black: #0A0A0A;
+    --color-brand-charcoal: #121212;
+    --color-brand-dark: #151515;
+    --color-brand-border: rgba(255, 255, 255, 0.1);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #0A0A0A;
+    color: #F3F3F3;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Artistic Flair Utilities */
+.text-stroke-yellow {
+  color: transparent;
+  -webkit-text-stroke: 1px #F5C400;
+}
+
+.text-stroke-white {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+}
+
+.text-stroke-yellow-bold {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #F5C400;
+}
+
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.bg-dot-pattern {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(245, 196, 0, 0.12) 1px, transparent 1px);
+}
+
+.glow-yellow-sm {
+  box-shadow: 0 0 20px -5px rgba(245, 196, 0, 0.35);
+}
+
+.glow-yellow-md {
+  box-shadow: 0 0 35px -5px rgba(245, 196, 0, 0.45);
+}
+
+.glow-yellow-lg {
+  box-shadow: 0 0 50px -10px rgba(245, 196, 0, 0.55);
+}
+
+.metallic-divider {
+  background: linear-gradient(90deg, transparent, rgba(245, 196, 0, 0.5), rgba(255, 255, 255, 0.8), rgba(245, 196, 0, 0.5), transparent);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #222222;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F5C400;
+}

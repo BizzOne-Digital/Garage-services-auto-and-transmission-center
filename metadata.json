@@ -1,0 +1,6 @@
+{
+  "name": "Garage Services Auto Et Centre De Transmission",
+  "description": "Premium automotive repair and specialized transmission center website for Garage Services Auto Et Centre De Transmission.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
