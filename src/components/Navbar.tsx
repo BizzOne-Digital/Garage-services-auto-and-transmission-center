@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             : 'bg-[#0A0A0A]/80 backdrop-blur-sm border-b border-white/5 py-4 sm:py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <a
             href="#home"
@@ -110,17 +110,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             })}
           </nav>
 
-          {/* Phone Number & Get a Quote Action CTA */}
-          <div className="hidden md:flex items-center gap-5">
-            {/* Phone Number Link */}
+          {/* Phone Icon CTA & Get a Quote Button */}
+          <div className="hidden lg:flex items-center gap-3.5 ml-6 xl:ml-8">
+            {/* Direct Phone Call Icon Link */}
             <a
               href={`tel:${BUSINESS_INFO.phoneRaw}`}
               id="navbar-phone-btn"
-              className="text-xs font-bold text-neutral-200 hover:text-[#F5C400] tracking-wider transition-colors flex items-center gap-2"
-              title={`Call Abdul at ${BUSINESS_INFO.phone}`}
+              className="p-2.5 bg-[#151515] hover:bg-[#F5C400] text-[#F5C400] hover:text-[#0A0A0A] border border-white/10 hover:border-[#F5C400] transition-all flex items-center justify-center shadow-md active:scale-95 group"
+              title={`Call ${BUSINESS_INFO.phone}`}
+              aria-label={`Call ${BUSINESS_INFO.phone}`}
             >
-              <Phone className="w-3.5 h-3.5 text-[#F5C400]" />
-              <span>{BUSINESS_INFO.phone}</span>
+              <Phone className="w-4 h-4 transition-transform group-hover:scale-110" />
             </a>
 
             {/* Primary CTA Button */}
@@ -139,7 +139,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               href={`tel:${BUSINESS_INFO.phoneRaw}`}
               id="mobile-header-call-btn"
               className="p-2 rounded-sm bg-[#F5C400] text-[#0A0A0A] font-bold flex items-center justify-center shadow-md active:scale-95 transition-transform"
-              aria-label="Call (514) 993-7705"
+              aria-label={`Call ${BUSINESS_INFO.phone}`}
+              title={`Call ${BUSINESS_INFO.phone}`}
             >
               <Phone className="w-4 h-4" />
             </a>
