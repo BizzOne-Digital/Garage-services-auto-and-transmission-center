@@ -54,7 +54,7 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
             <div className="relative overflow-hidden border border-white/10 bg-[#141414] shadow-2xl group">
               <div className="aspect-[4/3] sm:aspect-[16/11] overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1486006920555-c77dce18193b?q=80&w=1846&auto=format&fit=crop"
+                  src="https://www.garageuae.com/wp-content/uploads/2022/02/car-transmission-service.jpg"
                   alt="Professional mechanic inspecting engine and transmission system at Garage Services"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter grayscale brightness-90 contrast-125"
                   loading="lazy"
