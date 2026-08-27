@@ -60,8 +60,8 @@ export const Logo: React.FC<LogoProps> = ({
         <span className={`${titleSizes[size]} text-white uppercase leading-none font-sans`}>
           GARAGE <span className="text-[#F5C400]">SERVICES</span>
         </span>
-        <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-[#F5C400] font-bold uppercase mt-1">
-          AUTO & TRANSMISSION
+        <span className="text-[8.5px] sm:text-[9.5px] tracking-[0.18em] text-[#F5C400] font-bold uppercase mt-1">
+          AUTO & TRANSMISSION CENTER
         </span>
         {showTagline && (
           <span className="text-[9px] text-neutral-400 tracking-widest uppercase mt-0.5 font-mono">

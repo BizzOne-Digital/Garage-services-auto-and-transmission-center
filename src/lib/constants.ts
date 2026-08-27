@@ -1,14 +1,14 @@
 import { ServiceItem, TrustPillar, WhyChoosePoint, ProcessStep, Testimonial, TransmissionSymptom } from '../types';
 
 export const BUSINESS_INFO = {
-  name: "Garage Services Auto Et Centre De Transmission",
+  name: "Garage Services Auto and Transmission Center",
   shortName: "Garage Services",
   tagline: "Your Complete Auto Repair & Transmission Specialist",
   subTagline: "Professional automotive service, honest pricing, and dependable repairs you can trust.",
   contactPerson: "Abdul",
   phone: "(514) 993-7705",
   phoneRaw: "5149937705",
-  email: "seeratsalam@gmail.com",
+  email: "Servicesauto786@gmail.com",
   socialMediaName: "garage services auto and transmission center",
   locationNotice: "Serving Montreal & Greater Metropolitan Area. Mobile consultations and shop intake available.",
   yearsServingNotice: "Dedicated automotive craftsmanship & transmission diagnostic excellence.",
