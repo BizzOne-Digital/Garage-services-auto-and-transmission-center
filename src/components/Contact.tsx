@@ -263,7 +263,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                       <input
                         id="phone"
                         type="tel"
-                        placeholder="e.g. (514) 993-7705"
+                        placeholder="e.g. (514) 553-4206"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className={`w-full px-4 py-3 rounded-xl bg-[#121212] border text-sm text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] transition-colors ${

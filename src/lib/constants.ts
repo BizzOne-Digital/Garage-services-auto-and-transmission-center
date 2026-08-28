@@ -6,8 +6,8 @@ export const BUSINESS_INFO = {
   tagline: "Your Complete Auto Repair & Transmission Specialist",
   subTagline: "Professional automotive service, honest pricing, and dependable repairs you can trust.",
   contactPerson: "Abdul",
-  phone: "(514) 993-7705",
-  phoneRaw: "5149937705",
+  phone: "(514) 553-4206",
+  phoneRaw: "5145534206",
   email: "Servicesauto786@gmail.com",
   socialMediaName: "garage services auto and transmission center",
   locationNotice: "Serving Montreal & Greater Metropolitan Area. Mobile consultations and shop intake available.",
@@ -232,7 +232,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     step: "01",
     title: "Tell Us About Your Vehicle",
     description: "Contact us and explain what your vehicle needs.",
-    detail: "Give Abdul a call at (514) 993-7705 or fill out our online quote form with your vehicle details and symptoms.",
+    detail: "Give Abdul a call at (514) 553-4206 or fill out our online quote form with your vehicle details and symptoms.",
     iconName: "PhoneCall",
   },
   {
@@ -305,7 +305,7 @@ export const FAQS = [
   },
   {
     q: "How do I get an estimate for my car?",
-    a: "You can call Abdul directly at (514) 993-7705 or submit the online quote form with your vehicle's make, model, year, and description of symptoms for an upfront assessment.",
+    a: "You can call Abdul directly at (514) 553-4206 or submit the online quote form with your vehicle's make, model, year, and description of symptoms for an upfront assessment.",
   },
   {
     q: "What types of transmissions do you service?",

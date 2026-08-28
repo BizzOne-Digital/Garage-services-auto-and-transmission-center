@@ -87,7 +87,7 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
                   className="px-3 py-2 bg-[#F5C400] text-black font-bold text-xs uppercase tracking-tighter hover:bg-yellow-400 transition-colors"
                   aria-label="Call Abdul directly"
                 >
-                  (514) 993-7705
+                  (514) 553-4206
                 </a>
               </div>
             </div>
