@@ -46,6 +46,16 @@ export const fr = {
     status: 'Initialisation de la baie de diagnostic...',
   },
 
+  offline: {
+    badge: 'Hors ligne',
+    title: 'Aucune connexion Internet',
+    description:
+      "Nous n'arrivons pas à joindre le réseau. Vérifiez votre connexion Wi-Fi ou vos données mobiles, puis réessayez.",
+    retry: 'Réessayer',
+    checking: 'Vérification...',
+    callPrompt: 'Besoin de nous joindre maintenant ? Appelez-nous directement :',
+  },
+
   logo: {
     tagline: 'Montréal • Précision spécialisée',
     line2: 'CENTRE AUTO & TRANSMISSION',

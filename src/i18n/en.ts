@@ -47,6 +47,16 @@ export const en: Dictionary = {
     status: 'Initializing Diagnostic Bay...',
   },
 
+  offline: {
+    badge: 'Offline',
+    title: 'No internet connection',
+    description:
+      'We cannot reach the network right now. Check your Wi-Fi or mobile data, then try again.',
+    retry: 'Try again',
+    checking: 'Checking...',
+    callPrompt: 'Need to reach us right now? Call us directly:',
+  },
+
   logo: {
     tagline: 'Montréal • Specialized Precision',
     line2: 'AUTO & TRANSMISSION CENTER',
