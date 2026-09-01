@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, Mail, Share2, MapPin, Send, CheckCircle, AlertCircle, Clock, ShieldCheck, Car, User, Wrench } from 'lucide-react';
-import { BUSINESS_INFO, SERVICES } from '../lib/constants';
+import { Phone, Mail, Share2, MapPin, Send, CheckCircle, AlertCircle, Clock } from 'lucide-react';
+import { BUSINESS_INFO } from '../lib/constants';
 import { LeadFormData } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
+import { useServices } from '../i18n/useContent';
 
 interface ContactProps {
   initialServiceId?: string;
 }
 
 export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
+  const { t, format } = useLanguage();
+  const services = useServices();
   const [formData, setFormData] = useState<LeadFormData>({
     fullName: '',
     phone: '',
@@ -29,23 +33,23 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
     const newErrors: Partial<Record<keyof LeadFormData, string>> = {};
 
     if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Please provide your full name.';
+      newErrors.fullName = t.contact.errors.fullName;
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Please provide a valid phone number for contact.';
+      newErrors.phone = t.contact.errors.phoneRequired;
     } else if (formData.phone.replace(/\D/g, '').length < 10) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number.';
+      newErrors.phone = t.contact.errors.phoneInvalid;
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Please provide your email address.';
+      newErrors.email = t.contact.errors.emailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.';
+      newErrors.email = t.contact.errors.emailInvalid;
     }
 
     if (!formData.vehicleMakeModel.trim()) {
-      newErrors.vehicleMakeModel = 'Please specify your vehicle make & model.';
+      newErrors.vehicleMakeModel = t.contact.errors.vehicle;
     }
 
     setErrors(newErrors);
@@ -94,13 +98,13 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181818] border border-neutral-800 text-[11px] font-mono font-bold uppercase tracking-widest text-[#F5C400] mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#F5C400]" />
-            <span>Direct Communication</span>
+            <span>{t.contact.badge}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight uppercase">
-            Get In Touch With <span className="text-[#F5C400]">Our Specialists</span>
+            {t.contact.headline} <span className="text-[#F5C400]">{t.contact.headlineAccent}</span>
           </h2>
           <p className="text-sm sm:text-base text-neutral-400 mt-3 font-normal leading-relaxed">
-            Fill out the form below for an upfront quote or call Abdul directly for immediate assistance.
+            {t.contact.intro}
           </p>
         </div>
 
@@ -112,10 +116,10 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
             {/* Primary Business Card */}
             <div className="rounded-2xl bg-gradient-to-b from-[#181818] to-[#121212] border border-neutral-700/80 p-6 sm:p-8 shadow-xl">
               <h3 className="text-lg font-bold text-white uppercase tracking-tight mb-1">
-                {BUSINESS_INFO.name}
+                {t.common.businessName}
               </h3>
               <p className="text-xs font-mono text-[#F5C400] mb-6">
-                Attn: {BUSINESS_INFO.contactPerson} • Master Diagnostic Lead
+                {format(t.contact.attn, { name: BUSINESS_INFO.contactPerson })}
               </p>
 
               <div className="space-y-4">
@@ -129,7 +133,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">Direct Telephone</span>
+                    <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">{t.contact.phoneLabel}</span>
                     <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors">{BUSINESS_INFO.phone}</span>
                   </div>
                 </a>
@@ -144,7 +148,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">Email Inquiries</span>
+                    <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">{t.contact.emailLabel}</span>
                     <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors break-all">{BUSINESS_INFO.email}</span>
                   </div>
                 </a>
@@ -155,7 +159,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                     <Share2 className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">Social Media</span>
+                    <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">{t.contact.socialLabel}</span>
                     <span className="text-xs font-semibold text-neutral-200">{BUSINESS_INFO.socialMediaName}</span>
                   </div>
                 </div>
@@ -170,16 +174,16 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-white uppercase tracking-tight">
-                    Service Area & Workshop Intake
+                    {t.contact.areaTitle}
                   </h4>
                   <p className="text-xs text-neutral-300 mt-1 leading-relaxed">
-                    {BUSINESS_INFO.locationNotice}
+                    {t.contact.areaNotice}
                   </p>
                 </div>
               </div>
               <div className="pt-3 mt-3 border-t border-neutral-800 text-[11px] text-neutral-400 flex items-center gap-2">
                 <Clock className="w-3.5 h-3.5 text-[#F5C400]" />
-                <span>Call ahead for intake scheduling & diagnostic bays.</span>
+                <span>{t.contact.areaNote}</span>
               </div>
             </div>
 
@@ -191,10 +195,10 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
               
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-white uppercase tracking-tight">
-                  Request a Free Quote
+                  {t.contact.formTitle}
                 </h3>
                 <p className="text-xs text-neutral-400 mt-1">
-                  Tell us about your vehicle symptoms or required maintenance.
+                  {t.contact.formIntro}
                 </p>
               </div>
 
@@ -208,10 +212,14 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                     <CheckCircle className="w-8 h-8" />
                   </div>
                   <h4 className="text-lg font-bold text-white uppercase tracking-tight mb-2">
-                    Quote Request Received!
+                    {t.contact.successTitle}
                   </h4>
                   <p className="text-xs sm:text-sm text-neutral-300 max-w-md mb-6 leading-relaxed">
-                    Thank you, <span className="text-white font-bold">{formData.fullName}</span>. Abdul will review your vehicle details ({formData.vehicleMakeModel}) and get back to you promptly at <span className="text-[#F5C400]">{formData.phone}</span>.
+                    {format(t.contact.successBody, {
+                      name: formData.fullName,
+                      vehicle: formData.vehicleMakeModel,
+                      phone: formData.phone,
+                    })}
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
@@ -220,13 +228,13 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                       className="px-6 py-2.5 rounded-xl bg-[#F5C400] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2"
                     >
                       <Phone className="w-4 h-4" />
-                      <span>Call Abdul Now For Urgent Need</span>
+                      <span>{t.contact.successCall}</span>
                     </a>
                     <button
                       onClick={handleReset}
                       className="px-6 py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-bold text-xs uppercase tracking-wider transition-colors"
                     >
-                      Submit Another Vehicle
+                      {t.contact.successReset}
                     </button>
                   </div>
                 </motion.div>
@@ -237,12 +245,12 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="fullName" className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5">
-                        Full Name <span className="text-[#F5C400]">*</span>
+                        {t.contact.fields.fullName} <span className="text-[#F5C400]">*</span>
                       </label>
                       <input
                         id="fullName"
                         type="text"
-                        placeholder="e.g. John Doe"
+                        placeholder={t.contact.fields.fullNamePlaceholder}
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                         className={`w-full px-4 py-3 rounded-xl bg-[#121212] border text-sm text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] transition-colors ${
@@ -258,12 +266,12 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
 
                     <div>
                       <label htmlFor="phone" className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5">
-                        Phone Number <span className="text-[#F5C400]">*</span>
+                        {t.contact.fields.phone} <span className="text-[#F5C400]">*</span>
                       </label>
                       <input
                         id="phone"
                         type="tel"
-                        placeholder="e.g. (514) 553-4206"
+                        placeholder={t.contact.fields.phonePlaceholder}
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className={`w-full px-4 py-3 rounded-xl bg-[#121212] border text-sm text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] transition-colors ${
@@ -282,12 +290,12 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5">
-                        Email Address <span className="text-[#F5C400]">*</span>
+                        {t.contact.fields.email} <span className="text-[#F5C400]">*</span>
                       </label>
                       <input
                         id="email"
                         type="email"
-                        placeholder="e.g. yourname@gmail.com"
+                        placeholder={t.contact.fields.emailPlaceholder}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className={`w-full px-4 py-3 rounded-xl bg-[#121212] border text-sm text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] transition-colors ${
@@ -303,12 +311,12 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
 
                     <div>
                       <label htmlFor="vehicleMakeModel" className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5">
-                        Vehicle Make & Model <span className="text-[#F5C400]">*</span>
+                        {t.contact.fields.vehicle} <span className="text-[#F5C400]">*</span>
                       </label>
                       <input
                         id="vehicleMakeModel"
                         type="text"
-                        placeholder="e.g. 2018 Honda Civic"
+                        placeholder={t.contact.fields.vehiclePlaceholder}
                         value={formData.vehicleMakeModel}
                         onChange={(e) => setFormData({ ...formData, vehicleMakeModel: e.target.value })}
                         className={`w-full px-4 py-3 rounded-xl bg-[#121212] border text-sm text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] transition-colors ${
@@ -327,7 +335,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="serviceNeeded" className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5">
-                        Service Needed
+                        {t.contact.fields.service}
                       </label>
                       <select
                         id="serviceNeeded"
@@ -335,7 +343,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                         onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl bg-[#121212] border border-neutral-700 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#F5C400]"
                       >
-                        {SERVICES.map(s => (
+                        {services.map(s => (
                           <option key={s.id} value={s.id} className="bg-[#181818] text-white">
                             {s.title}
                           </option>
@@ -345,7 +353,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
 
                     <div>
                       <label htmlFor="transmissionType" className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5">
-                        Transmission Type
+                        {t.contact.fields.transmissionType}
                       </label>
                       <select
                         id="transmissionType"
@@ -353,11 +361,11 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                         onChange={(e) => setFormData({ ...formData, transmissionType: e.target.value })}
                         className="w-full px-4 py-3 rounded-xl bg-[#121212] border border-neutral-700 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#F5C400]"
                       >
-                        <option value="automatic" className="bg-[#181818]">Automatic</option>
-                        <option value="manual" className="bg-[#181818]">Manual / Standard</option>
-                        <option value="cvt" className="bg-[#181818]">CVT (Continuously Variable)</option>
-                        <option value="dual-clutch" className="bg-[#181818]">Dual-Clutch / DSG</option>
-                        <option value="unsure" className="bg-[#181818]">Unsure / Need Inspection</option>
+                        <option value="automatic" className="bg-[#181818]">{t.contact.transmissionOptions.automatic}</option>
+                        <option value="manual" className="bg-[#181818]">{t.contact.transmissionOptions.manual}</option>
+                        <option value="cvt" className="bg-[#181818]">{t.contact.transmissionOptions.cvt}</option>
+                        <option value="dual-clutch" className="bg-[#181818]">{t.contact.transmissionOptions.dualClutch}</option>
+                        <option value="unsure" className="bg-[#181818]">{t.contact.transmissionOptions.unsureInspection}</option>
                       </select>
                     </div>
                   </div>
@@ -365,12 +373,12 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                   {/* Message / Symptoms */}
                   <div>
                     <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-neutral-300 mb-1.5">
-                      Describe Symptoms / Request Details (Optional)
+                      {t.contact.fields.message}
                     </label>
                     <textarea
                       id="message"
                       rows={3}
-                      placeholder="e.g. Shifting jerk between 2nd and 3rd gear, warning light on dashboard..."
+                      placeholder={t.contact.fields.messagePlaceholder}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-[#121212] border border-neutral-700 text-sm text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400]"
@@ -387,18 +395,18 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                     {loading ? (
                       <span className="flex items-center gap-2">
                         <span className="w-4 h-4 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin" />
-                        <span>Sending Details to Abdul...</span>
+                        <span>{t.contact.submitting}</span>
                       </span>
                     ) : (
                       <>
-                        <span>Request a Quote</span>
+                        <span>{t.contact.submit}</span>
                         <Send className="w-4 h-4" />
                       </>
                     )}
                   </button>
 
                   <p className="text-[11px] text-center text-neutral-500 font-mono">
-                    Direct confidential dispatch to Abdul ({BUSINESS_INFO.email})
+                    {format(t.contact.dispatchNote, { email: BUSINESS_INFO.email })}
                   </p>
                 </form>
               )}

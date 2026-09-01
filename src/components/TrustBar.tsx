@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ShieldCheck, BadgeDollarSign, Cog, HeartHandshake } from 'lucide-react';
-import { TRUST_PILLARS } from '../lib/constants';
+import { useLanguage } from '../i18n/LanguageContext';
+import { useTrustPillars } from '../i18n/useContent';
 
 export const TrustBar: React.FC = () => {
+  const { t } = useLanguage();
+  const pillars = useTrustPillars();
+
   const getIcon = (name: string) => {
     switch (name) {
       case 'ShieldCheck':
@@ -23,7 +27,7 @@ export const TrustBar: React.FC = () => {
     <section className="relative z-20 border-y border-white/10 bg-[#111111]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
-          {TRUST_PILLARS.map((pillar, index) => (
+          {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.title}
               initial={{ opacity: 0, y: 15 }}
@@ -34,7 +38,7 @@ export const TrustBar: React.FC = () => {
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-500 font-mono font-bold">
-                  0{index + 1} // Pillar
+                  0{index + 1} // {t.trustBar.pillarLabel}
                 </span>
                 <div className="w-8 h-8 rounded-sm bg-[#1A1A1A] border border-white/10 flex items-center justify-center group-hover:border-[#F5C400]/40 transition-colors">
                   {getIcon(pillar.iconName)}

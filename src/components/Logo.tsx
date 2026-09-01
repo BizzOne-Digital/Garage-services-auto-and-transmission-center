@@ -1,5 +1,6 @@
 import React from 'react';
 import { BUSINESS_INFO } from '../lib/constants';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface LogoProps {
   className?: string;
@@ -14,6 +15,8 @@ export const Logo: React.FC<LogoProps> = ({
   showTagline = false,
   imageOnly = false,
 }) => {
+  const { t } = useLanguage();
+
   const containerSizes = {
     sm: 'w-9 h-9',
     md: 'w-11 h-11',
@@ -34,7 +37,7 @@ export const Logo: React.FC<LogoProps> = ({
         <div className={`relative ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F5C400] shadow-xl flex items-center justify-center p-0.5 group`}>
           <img
             src={BUSINESS_INFO.logoUrl}
-            alt="Garage Services Auto and Transmission Center Official Logo"
+            alt={t.logo.altEmblem}
             className="w-full h-full object-cover object-center rounded-full scale-[1.04]"
             referrerPolicy="no-referrer"
           />
@@ -49,7 +52,7 @@ export const Logo: React.FC<LogoProps> = ({
       <div className={`relative shrink-0 ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F5C400] shadow-md hover:scale-105 transition-transform duration-300 flex items-center justify-center p-0.5`}>
         <img
           src={BUSINESS_INFO.logoUrl}
-          alt="Garage Services Auto and Transmission Center Emblem"
+          alt={t.logo.altEmblem}
           className="w-full h-full object-cover object-center rounded-full scale-[1.04]"
           referrerPolicy="no-referrer"
         />
@@ -61,11 +64,11 @@ export const Logo: React.FC<LogoProps> = ({
           GARAGE <span className="text-[#F5C400]">SERVICES</span>
         </span>
         <span className="text-[8.5px] sm:text-[9.5px] tracking-[0.18em] text-[#F5C400] font-bold uppercase mt-1">
-          AUTO & TRANSMISSION CENTER
+          {t.logo.line2}
         </span>
         {showTagline && (
           <span className="text-[9px] text-neutral-400 tracking-widest uppercase mt-0.5 font-mono">
-            Montréal • Specialized Precision
+            {t.logo.tagline}
           </span>
         )}
       </div>

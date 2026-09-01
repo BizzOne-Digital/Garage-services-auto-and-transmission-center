@@ -1,13 +1,16 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Phone, ArrowRight, ShieldCheck, CheckCircle2, Cpu, Wrench, Sparkles, MapPin } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { BUSINESS_INFO } from '../lib/constants';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface HeroProps {
   onOpenQuoteModal: (serviceId?: string) => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
+  const { t } = useLanguage();
+
   return (
     <section
       id="home"
@@ -23,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
         >
           <img
             src="https://images.unsplash.com/photo-1613214149922-f1809c99b414?q=80&w=2070&auto=format&fit=crop"
-            alt="Modern automotive repair workshop and transmission diagnostic bay"
+            alt={t.hero.imageAlt}
             className="w-full h-full object-cover object-center opacity-20 filter grayscale contrast-125"
             loading="eager"
           />
@@ -51,7 +54,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
             >
               <div className="w-8 h-[1.5px] bg-[#F5C400]" />
               <span className="text-xs font-bold uppercase tracking-[0.3em]">
-                Montréal's Transmission & Auto Specialist
+                {t.hero.eyebrow}
               </span>
             </motion.div>
 
@@ -62,11 +65,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.92] tracking-tighter uppercase text-white"
             >
-              Your Complete <br />
+              {t.hero.headlineLine1} <br />
               <span className="text-transparent" style={{ WebkitTextStroke: '1.5px #F5C400' }}>
-                Auto Repair
-              </span> & <br />
-              Transmission
+                {t.hero.headlineAccent}
+              </span> <br />
+              {t.hero.headlineLine3}
             </motion.h1>
 
             {/* Supporting Subtext with Yellow Left Border Accent */}
@@ -76,7 +79,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-neutral-400 text-base sm:text-lg max-w-xl leading-relaxed border-l-2 border-[#F5C400] pl-5 sm:pl-6"
             >
-              Professional automotive service you can count on. We provide dependable repairs, expert transmission overhauls, and honest pricing for drivers and partner garages.
+              {t.hero.subtext}
             </motion.p>
 
             {/* CTA Action Buttons & Location Meta */}
@@ -92,7 +95,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
                 onClick={() => onOpenQuoteModal()}
                 className="group flex items-center justify-center gap-4 bg-white text-black px-8 py-4 font-black uppercase tracking-tighter hover:bg-[#F5C400] transition-all active:scale-95"
               >
-                <span>Talk to a Specialist</span>
+                <span>{t.hero.primaryCta}</span>
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
               </button>
 
@@ -103,13 +106,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
                   id="hero-secondary-call-btn"
                   className="flex flex-col justify-center text-left group"
                 >
-                  <span className="text-[10px] uppercase tracking-widest text-neutral-500 font-mono">Direct Workshop</span>
+                  <span className="text-[10px] uppercase tracking-widest text-neutral-500 font-mono">{t.hero.directWorkshop}</span>
                   <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors">{BUSINESS_INFO.phone}</span>
                 </a>
                 <div className="h-8 w-[1px] bg-white/10 hidden sm:block" />
                 <div className="flex flex-col text-left">
-                  <span className="text-[10px] uppercase tracking-widest text-neutral-500 font-mono">Location</span>
-                  <span className="text-sm font-bold text-neutral-200">Montréal, QC</span>
+                  <span className="text-[10px] uppercase tracking-widest text-neutral-500 font-mono">{t.hero.locationLabel}</span>
+                  <span className="text-sm font-bold text-neutral-200">{t.common.location}</span>
                 </div>
               </div>
             </motion.div>
@@ -123,17 +126,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
             >
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#F5C400]" />
-                <span>25+ Years Experience</span>
+                <span>{t.hero.trust1}</span>
               </div>
               <span className="text-neutral-700 hidden sm:inline">•</span>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#F5C400]" />
-                <span>Fair & Clear Pricing</span>
+                <span>{t.hero.trust2}</span>
               </div>
               <span className="text-neutral-700 hidden sm:inline">•</span>
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#F5C400]" />
-                <span>Master Tech Diagnostics</span>
+                <span>{t.hero.trust3}</span>
               </div>
             </motion.div>
           </div>
@@ -146,69 +149,29 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
             className="lg:col-span-5 relative flex flex-col justify-center gap-4"
           >
             <div className="grid grid-cols-1 gap-3.5 z-10">
-              
-              {/* Card 01 */}
-              <div
-                onClick={() => onOpenQuoteModal('transmission-services')}
-                className="group bg-[#151515] p-6 border-l-4 border-transparent hover:border-[#F5C400] transition-all cursor-pointer relative overflow-hidden border border-white/5 hover:border-white/10"
-              >
-                <div className="absolute -right-3 -bottom-3 text-6xl font-black text-white/5 group-hover:text-[#F5C400]/10 transition-colors pointer-events-none select-none">
-                  01
-                </div>
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-[#F5C400] font-black text-sm uppercase tracking-widest">
-                    Transmission Overhaul & Rebuild
-                  </h3>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 group-hover:text-white transition-colors">
-                    Quote &rarr;
-                  </span>
-                </div>
-                <p className="text-xs text-neutral-400 leading-normal max-w-[85%]">
-                  Specialized precision rebuilds, slipping gear resolution, and torque converter calibration.
-                </p>
-              </div>
 
-              {/* Card 02 */}
-              <div
-                onClick={() => onOpenQuoteModal('brake-services')}
-                className="group bg-[#151515] p-6 border-l-4 border-transparent hover:border-[#F5C400] transition-all cursor-pointer relative overflow-hidden border border-white/5 hover:border-white/10"
-              >
-                <div className="absolute -right-3 -bottom-3 text-6xl font-black text-white/5 group-hover:text-[#F5C400]/10 transition-colors pointer-events-none select-none">
-                  02
+              {t.hero.cards.map((card, index) => (
+                <div
+                  key={card.serviceId}
+                  onClick={() => onOpenQuoteModal(card.serviceId)}
+                  className="group bg-[#151515] p-6 border-l-4 border-transparent hover:border-[#F5C400] transition-all cursor-pointer relative overflow-hidden border border-white/5 hover:border-white/10"
+                >
+                  <div className="absolute -right-3 -bottom-3 text-6xl font-black text-white/5 group-hover:text-[#F5C400]/10 transition-colors pointer-events-none select-none">
+                    {`0${index + 1}`}
+                  </div>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-[#F5C400] font-black text-sm uppercase tracking-widest">
+                      {card.title}
+                    </h3>
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 group-hover:text-white transition-colors">
+                      {t.common.quote} &rarr;
+                    </span>
+                  </div>
+                  <p className="text-xs text-neutral-400 leading-normal max-w-[85%]">
+                    {card.desc}
+                  </p>
                 </div>
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-[#F5C400] font-black text-sm uppercase tracking-widest">
-                    Brake & Stopping Systems
-                  </h3>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 group-hover:text-white transition-colors">
-                    Quote &rarr;
-                  </span>
-                </div>
-                <p className="text-xs text-neutral-400 leading-normal max-w-[85%]">
-                  Precision stopping power maintenance, rotor replacement, and ABS system troubleshooting.
-                </p>
-              </div>
-
-              {/* Card 03 */}
-              <div
-                onClick={() => onOpenQuoteModal('transmission-diagnostics')}
-                className="group bg-[#151515] p-6 border-l-4 border-transparent hover:border-[#F5C400] transition-all cursor-pointer relative overflow-hidden border border-white/5 hover:border-white/10"
-              >
-                <div className="absolute -right-3 -bottom-3 text-6xl font-black text-white/5 group-hover:text-[#F5C400]/10 transition-colors pointer-events-none select-none">
-                  03
-                </div>
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-[#F5C400] font-black text-sm uppercase tracking-widest">
-                    Computer Engine Diagnostics
-                  </h3>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 group-hover:text-white transition-colors">
-                    Quote &rarr;
-                  </span>
-                </div>
-                <p className="text-xs text-neutral-400 leading-normal max-w-[85%]">
-                  State-of-the-art computer scanning to isolate warning lights and performance faults.
-                </p>
-              </div>
+              ))}
 
             </div>
 
@@ -217,14 +180,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-[#F5C400] animate-pulse" />
                 <span className="text-xs font-mono uppercase text-neutral-300">
-                  Ready for Immediate Intake
+                  {t.hero.intakeBanner}
                 </span>
               </div>
               <a
                 href={`tel:${BUSINESS_INFO.phoneRaw}`}
                 className="text-xs font-bold uppercase tracking-wider text-[#F5C400] hover:underline"
               >
-                Call Abdul &rarr;
+                {t.common.callAbdul} &rarr;
               </a>
             </div>
 

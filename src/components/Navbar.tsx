@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, Menu, X, ArrowUpRight, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Phone, Menu, X, ArrowUpRight, ChevronRight } from 'lucide-react';
 import { Logo } from './Logo';
+import { LanguageToggle } from './LanguageToggle';
 import { BUSINESS_INFO } from '../lib/constants';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface NavbarProps {
   onOpenQuoteModal: (serviceId?: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
+  const { t, format } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -22,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
       }
 
       // Track active section
-      const sections = ['home', 'about', 'services', 'transmission', 'why-choose-us', 'process', 'pricing', 'testimonials', 'contact'];
+      const sections = ['home', 'about', 'services', 'pricing', 'testimonials', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -43,15 +46,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About Us', href: '#about', id: 'about' },
-    { name: 'Services', href: '#services', id: 'services' },
-    { name: 'Transmission', href: '#transmission', id: 'transmission' },
-    { name: 'Why Us', href: '#why-choose-us', id: 'why-choose-us' },
-    { name: 'Process', href: '#process', id: 'process' },
-    { name: 'Pricing', href: '#pricing', id: 'pricing' },
-    { name: 'Testimonials', href: '#testimonials', id: 'testimonials' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: t.nav.home, href: '#home', id: 'home' },
+    { name: t.nav.about, href: '#about', id: 'about' },
+    { name: t.nav.services, href: '#services', id: 'services' },
+    { name: t.nav.pricing, href: '#pricing', id: 'pricing' },
+    { name: t.nav.testimonials, href: '#testimonials', id: 'testimonials' },
+    { name: t.nav.contact, href: '#contact', id: 'contact' },
   ];
 
   const handleNavClick = (href: string) => {
@@ -61,6 +61,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const callLabel = `${t.common.call} ${BUSINESS_INFO.phone}`;
 
   return (
     <>
@@ -81,13 +83,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               handleNavClick('#home');
             }}
             className="group focus:outline-none focus:ring-1 focus:ring-[#F5C400] p-1"
-            aria-label="Garage Services Auto Et Centre De Transmission - Return to Top"
+            aria-label={t.nav.ariaLogo}
           >
             <Logo size="md" />
           </a>
 
           {/* Desktop Navigation Links - Sharp Artistic Tracking */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-semibold uppercase tracking-widest text-neutral-400" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-semibold uppercase tracking-widest text-neutral-400" aria-label={t.nav.ariaMain}>
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -110,15 +112,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             })}
           </nav>
 
-          {/* Phone Icon CTA & Get a Quote Button */}
+          {/* Language Switcher, Phone Icon CTA & Get a Quote Button */}
           <div className="hidden lg:flex items-center gap-3.5 ml-6 xl:ml-8">
+            {/* FR | EN Language Switcher */}
+            <LanguageToggle />
+
             {/* Direct Phone Call Icon Link */}
             <a
               href={`tel:${BUSINESS_INFO.phoneRaw}`}
               id="navbar-phone-btn"
               className="p-2.5 bg-[#151515] hover:bg-[#F5C400] text-[#F5C400] hover:text-[#0A0A0A] border border-white/10 hover:border-[#F5C400] transition-all flex items-center justify-center shadow-md active:scale-95 group"
-              title={`Call ${BUSINESS_INFO.phone}`}
-              aria-label={`Call ${BUSINESS_INFO.phone}`}
+              title={callLabel}
+              aria-label={callLabel}
             >
               <Phone className="w-4 h-4 transition-transform group-hover:scale-110" />
             </a>
@@ -129,18 +134,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               onClick={() => onOpenQuoteModal()}
               className="bg-[#F5C400] text-[#0A0A0A] px-5 py-2.5 text-xs font-black uppercase tracking-tighter hover:bg-yellow-400 transition-all transform hover:-translate-y-0.5 shadow-md active:scale-95"
             >
-              <span>Get a Quote</span>
+              <span>{t.common.getQuote}</span>
             </button>
           </div>
 
-          {/* Mobile Actions: Phone Icon + Hamburger */}
+          {/* Mobile Actions: Language Toggle + Phone Icon + Hamburger */}
           <div className="flex lg:hidden items-center gap-2">
+            <LanguageToggle />
+
             <a
               href={`tel:${BUSINESS_INFO.phoneRaw}`}
               id="mobile-header-call-btn"
               className="p-2 rounded-sm bg-[#F5C400] text-[#0A0A0A] font-bold flex items-center justify-center shadow-md active:scale-95 transition-transform"
-              aria-label={`Call ${BUSINESS_INFO.phone}`}
-              title={`Call ${BUSINESS_INFO.phone}`}
+              aria-label={callLabel}
+              title={callLabel}
             >
               <Phone className="w-4 h-4" />
             </a>
@@ -150,7 +157,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 bg-[#151515] border border-white/10 text-neutral-200 hover:text-white transition-colors"
               aria-expanded={mobileMenuOpen}
-              aria-label="Toggle Mobile Menu"
+              aria-label={t.nav.ariaToggleMenu}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -190,12 +197,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               ))}
 
               <div className="pt-4 mt-2 border-t border-neutral-800 flex flex-col gap-3">
+                <div className="flex items-center justify-between px-1">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-500">
+                    {t.language.label}
+                  </span>
+                  <LanguageToggle size="md" />
+                </div>
+
                 <a
                   href={`tel:${BUSINESS_INFO.phoneRaw}`}
                   className="flex items-center justify-center gap-2.5 w-full py-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white font-bold text-sm hover:border-[#F5C400] transition-colors"
                 >
                   <Phone className="w-4 h-4 text-[#F5C400]" />
-                  <span>Call Abdul: {BUSINESS_INFO.phone}</span>
+                  <span>{format(t.nav.callAbdulWithPhone, { phone: BUSINESS_INFO.phone })}</span>
                 </a>
 
                 <button
@@ -205,7 +219,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
                   }}
                   className="w-full py-3 rounded-lg bg-[#F5C400] text-[#0A0A0A] font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-all"
                 >
-                  <span>Get a Free Quote</span>
+                  <span>{t.common.getFreeQuote}</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
               </div>

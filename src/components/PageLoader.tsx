@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './Logo';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface PageLoaderProps {
   onComplete?: () => void;
 }
 
 export const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
               transition={{ delay: 0.3, duration: 0.4 }}
               className="text-[11px] font-mono tracking-widest text-[#F5C400] uppercase mt-3"
             >
-              Initializing Diagnostic Bay...
+              {t.loader.status}
             </motion.p>
           </div>
         </motion.div>

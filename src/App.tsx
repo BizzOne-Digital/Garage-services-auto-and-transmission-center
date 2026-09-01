@@ -5,9 +5,6 @@ import { Hero } from './components/Hero';
 import { TrustBar } from './components/TrustBar';
 import { About } from './components/About';
 import { Services } from './components/Services';
-import { TransmissionFeature } from './components/TransmissionFeature';
-import { WhyChooseUs } from './components/WhyChooseUs';
-import { Process } from './components/Process';
 import { Pricing } from './components/Pricing';
 import { Testimonials } from './components/Testimonials';
 import { LeadCTA } from './components/LeadCTA';
@@ -49,15 +46,6 @@ export default function App() {
 
         {/* 6 Core Automotive & Transmission Services */}
         <Services onOpenQuoteModal={handleOpenQuoteModal} />
-
-        {/* Dedicated Flagship Transmission Specialist Feature & Symptom Checker */}
-        <TransmissionFeature onOpenQuoteModal={handleOpenQuoteModal} />
-
-        {/* 5 Reasons: Why Choose Us */}
-        <WhyChooseUs onOpenQuoteModal={() => handleOpenQuoteModal()} />
-
-        {/* 4-Step Repair Process */}
-        <Process onOpenQuoteModal={() => handleOpenQuoteModal()} />
 
         {/* Transparent Pricing & FAQs */}
         <Pricing onOpenQuoteModal={handleOpenQuoteModal} />

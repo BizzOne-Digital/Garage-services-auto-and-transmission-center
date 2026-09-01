@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Wrench, Cpu, Activity, Disc, Flame, CheckCircle2, ArrowRight, Check, X, ShieldAlert, Sparkles } from 'lucide-react';
-import { SERVICES } from '../lib/constants';
 import { ServiceItem } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
+import { useServices } from '../i18n/useContent';
 
 interface ServicesProps {
   onOpenQuoteModal: (serviceId?: string) => void;
 }
 
 export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
+  const { t, format } = useLanguage();
+  const services = useServices();
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
 
   const getServiceIcon = (iconName: string, className = "w-6 h-6") => {
     switch (iconName) {
@@ -31,7 +34,10 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
     }
   };
 
-  const filteredServices = SERVICES.filter(service => {
+  // Derived so the open detail modal follows a language switch.
+  const selectedService: ServiceItem | null = services.find(s => s.id === selectedServiceId) ?? null;
+
+  const filteredServices = services.filter(service => {
     if (activeCategory === 'all') return true;
     return service.category === activeCategory;
   });
@@ -49,27 +55,27 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
             <div className="flex items-center gap-3 text-[#F5C400]">
               <div className="w-8 h-[1.5px] bg-[#F5C400]" />
               <span className="text-xs font-bold uppercase tracking-[0.3em]">
-                Precision Diagnostic Bay
+                {t.services.eyebrow}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-[0.95]">
-              Specialized <br />
+              {t.services.headlineLine1} <br />
               <span className="text-transparent" style={{ WebkitTextStroke: '1.2px #F5C400' }}>
-                Automotive Services
+                {t.services.headlineAccent}
               </span>
             </h2>
             <p className="text-xs sm:text-sm text-neutral-400 max-w-xl leading-relaxed pt-1">
-              From complete master transmission rebuilds to precision brake repairs and computer diagnostics.
+              {t.services.intro}
             </p>
           </div>
 
           {/* Category Filter Tabs with Sharp Monospaced Design */}
           <div className="flex flex-wrap items-center gap-2 bg-[#121212] p-1 border border-white/10 self-start md:self-auto">
             {[
-              { id: 'all', label: 'All Services' },
-              { id: 'transmission', label: 'Transmission' },
-              { id: 'mechanical', label: 'Mechanical' },
-              { id: 'maintenance', label: 'Maintenance' },
+              { id: 'all', label: t.services.filters.all },
+              { id: 'transmission', label: t.services.filters.transmission },
+              { id: 'mechanical', label: t.services.filters.mechanical },
+              { id: 'maintenance', label: t.services.filters.maintenance },
             ].map(tab => (
               <button
                 key={tab.id}
@@ -114,7 +120,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                     </div>
                     {isTransmissionSpecialty && (
                       <span className="text-[9px] font-mono uppercase tracking-[0.2em] font-bold px-2 py-0.5 bg-[#201B0B] text-[#F5C400] border border-[#F5C400]/40">
-                        Specialty
+                        {t.services.specialtyBadge}
                       </span>
                     )}
                   </div>
@@ -143,18 +149,18 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                 {/* Card Footer Actions */}
                 <div className="flex items-center justify-between pt-4 border-t border-white/10 relative z-10">
                   <button
-                    onClick={() => setSelectedService(service)}
+                    onClick={() => setSelectedServiceId(service.id)}
                     className="text-xs font-bold text-neutral-400 hover:text-white uppercase tracking-wider transition-colors"
                   >
-                    Details &rarr;
+                    {t.common.details} &rarr;
                   </button>
 
                   <button
                     onClick={() => onOpenQuoteModal(service.id)}
                     className="px-3.5 py-1.5 bg-[#202020] group-hover:bg-[#F5C400] text-neutral-200 group-hover:text-black font-black text-xs uppercase tracking-tighter border border-white/10 group-hover:border-[#F5C400] transition-all flex items-center gap-1.5"
-                    aria-label={`Get quote for ${service.title}`}
+                    aria-label={format(t.services.ariaQuoteFor, { service: service.title })}
                   >
-                    <span>Get Quote</span>
+                    <span>{t.services.getQuote}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -177,9 +183,9 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
             >
               {/* Close Button */}
               <button
-                onClick={() => setSelectedService(null)}
+                onClick={() => setSelectedServiceId(null)}
                 className="absolute top-4 right-4 p-2 rounded-lg bg-[#1F1F1F] text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
-                aria-label="Close modal"
+                aria-label={t.services.modal.ariaClose}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -190,7 +196,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                   {getServiceIcon(selectedService.iconName, "w-6 h-6")}
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono font-bold text-[#F5C400] uppercase tracking-wider">Service Overview</span>
+                  <span className="text-[11px] font-mono font-bold text-[#F5C400] uppercase tracking-wider">{t.services.modal.overview}</span>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-white uppercase tracking-tight">
                     {selectedService.title}
                   </h3>
@@ -205,7 +211,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
               {/* Service Features Checklist */}
               <div className="mb-6">
                 <h4 className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider mb-3">
-                  Scope of Work & Capabilities
+                  {t.services.modal.scope}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {selectedService.features.map((feat, i) => (
@@ -222,7 +228,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                 <div className="mb-6 p-4 rounded-xl bg-[#1D190B] border border-[#F5C400]/30">
                   <div className="flex items-center gap-2 mb-2 text-[#F5C400]">
                     <ShieldAlert className="w-4 h-4" />
-                    <span className="text-xs font-bold uppercase tracking-wider">Common Symptoms Indicating This Service:</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">{t.services.modal.symptomsTitle}</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {selectedService.commonSymptoms.map((sym, idx) => (
@@ -236,27 +242,27 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
 
               {/* Ideal for note */}
               <div className="p-3 rounded-lg bg-[#181818] border border-neutral-800 text-xs text-neutral-400 mb-6">
-                <span className="font-bold text-white uppercase font-mono mr-1">Ideal For:</span>
+                <span className="font-bold text-white uppercase font-mono mr-1">{t.services.modal.idealFor}</span>
                 {selectedService.idealFor}
               </div>
 
               {/* Modal CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 border-t border-neutral-800">
                 <button
-                  onClick={() => setSelectedService(null)}
+                  onClick={() => setSelectedServiceId(null)}
                   className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-bold text-xs uppercase tracking-wider transition-colors"
                 >
-                  Close
+                  {t.common.close}
                 </button>
                 <button
                   onClick={() => {
                     const sid = selectedService.id;
-                    setSelectedService(null);
+                    setSelectedServiceId(null);
                     onOpenQuoteModal(sid);
                   }}
                   className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#F5C400] hover:bg-[#E5B700] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-colors"
                 >
-                  <span>Book / Request Quote For This</span>
+                  <span>{t.services.modal.cta}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

@@ -1,20 +1,17 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle2, ShieldCheck, Wrench, ArrowRight, Phone, Sparkles, Cpu, Users } from 'lucide-react';
+import { ArrowRight, Phone } from 'lucide-react';
 import { BUSINESS_INFO } from '../lib/constants';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface AboutProps {
   onOpenQuoteModal: () => void;
 }
 
 export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
-  const highlights = [
-    { num: "01", title: "Professional Service", desc: "Rigorous standards and certified diagnostic equipment on every vehicle." },
-    { num: "02", title: "Fair & Clear Pricing", desc: "Honest, itemized estimates with no surprise costs or unnecessary upsells." },
-    { num: "03", title: "Dependable Workmanship", desc: "Repairs performed right the first time with premium quality components." },
-    { num: "04", title: "Transmission Expertise", desc: "Specialized in-depth transmission rebuilds, diagnostics, and overhauls." },
-    { num: "05", title: "Customer-First Approach", desc: "Transparent communication with direct, approachable consultation from Abdul." },
-  ];
+  const { t } = useLanguage();
+  const highlights = t.about.highlights;
+
 
   return (
     <section id="about" className="py-20 sm:py-28 bg-[#0A0A0A] relative overflow-hidden">
@@ -28,13 +25,13 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
           <div className="flex items-center gap-3 text-[#F5C400]">
             <div className="w-8 h-[1.5px] bg-[#F5C400]" />
             <span className="text-xs font-bold uppercase tracking-[0.3em]">
-              Heritage & Craftsmanship
+              {t.about.eyebrow}
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-[0.95]">
-            Automotive Expertise <br />
+            {t.about.headlineLine1} <br />
             <span className="text-transparent" style={{ WebkitTextStroke: '1.2px #F5C400' }}>
-              You Can Trust
+              {t.about.headlineAccent}
             </span>
           </h2>
         </div>
@@ -55,7 +52,7 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
               <div className="aspect-[4/3] sm:aspect-[16/11] overflow-hidden">
                 <img
                   src="https://www.garageuae.com/wp-content/uploads/2022/02/car-transmission-service.jpg"
-                  alt="Professional mechanic inspecting engine and transmission system at Garage Services"
+                  alt={t.about.imageAlt}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter grayscale brightness-90 contrast-125"
                   loading="lazy"
                 />
@@ -68,7 +65,7 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
               <div className="absolute top-4 left-4 bg-[#0A0A0A] border-l-2 border-[#F5C400] px-4 py-2 flex items-center gap-2.5 shadow-xl">
                 <span className="w-2 h-2 bg-[#F5C400]" />
                 <span className="text-xs font-mono font-bold text-white uppercase tracking-widest">
-                  Transmission Diagnostic Bay
+                  {t.about.badgeBay}
                 </span>
               </div>
 
@@ -76,18 +73,18 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
               <div className="absolute bottom-4 left-4 right-4 bg-[#111111] border border-white/10 p-4 shadow-2xl flex items-center justify-between">
                 <div>
                   <span className="text-[10px] uppercase font-mono text-[#F5C400] font-bold block tracking-wider">
-                    Lead Technician
+                    {t.about.leadTechLabel}
                   </span>
                   <span className="text-sm font-black text-white uppercase tracking-tight">
-                    Abdul • Master Diagnostic Lead
+                    {t.about.leadTechName}
                   </span>
                 </div>
                 <a
                   href={`tel:${BUSINESS_INFO.phoneRaw}`}
                   className="px-3 py-2 bg-[#F5C400] text-black font-bold text-xs uppercase tracking-tighter hover:bg-yellow-400 transition-colors"
-                  aria-label="Call Abdul directly"
+                  aria-label={t.about.ariaCall}
                 >
-                  (514) 553-4206
+                  {BUSINESS_INFO.phone}
                 </a>
               </div>
             </div>
@@ -107,10 +104,10 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
             {/* Story Paragraphs with Editorial Border */}
             <div className="relative pl-6 border-l-2 border-[#F5C400] mb-8 space-y-3">
               <p className="text-base sm:text-lg text-white font-bold leading-snug uppercase tracking-tight">
-                {BUSINESS_INFO.name} is dedicated to honest diagnostics, precision transmission rebuilds, and dependable automotive care.
+                {t.about.intro}
               </p>
               <p className="text-sm text-neutral-400 leading-relaxed">
-                We take immense pride in serving both everyday vehicle owners seeking dependable repairs and professional mechanic garages needing trusted, high-precision transmission sub-contracting and diagnostic support.
+                {t.about.paragraph}
               </p>
             </div>
 
@@ -139,7 +136,7 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
                 onClick={onOpenQuoteModal}
                 className="px-7 py-3.5 bg-white text-black font-black text-xs uppercase tracking-tighter hover:bg-[#F5C400] transition-all flex items-center justify-center gap-2 active:scale-95"
               >
-                <span>Request a Free Quote</span>
+                <span>{t.common.requestFreeQuote}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -148,7 +145,7 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
                 className="px-6 py-3.5 bg-[#151515] hover:bg-[#1E1E1E] text-neutral-200 hover:text-white border border-white/10 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
               >
                 <Phone className="w-3.5 h-3.5 text-[#F5C400]" />
-                <span>Call {BUSINESS_INFO.phone}</span>
+                <span>{t.common.call} {BUSINESS_INFO.phone}</span>
               </a>
             </div>
 

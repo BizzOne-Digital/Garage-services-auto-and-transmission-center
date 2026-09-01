@@ -1,37 +1,30 @@
-export interface ServiceItem {
+export type ServiceCategory = 'transmission' | 'mechanical' | 'maintenance';
+
+/** Language-independent structure of a service (kept in lib/constants.ts). */
+export interface ServiceMeta {
   id: string;
+  category: ServiceCategory;
+  iconName: string;
+}
+
+/** Translated copy for a service (kept in the i18n dictionaries). */
+export interface ServiceContent {
   title: string;
-  category: 'transmission' | 'mechanical' | 'maintenance';
   shortDesc: string;
   fullDesc: string;
-  iconName: string;
   features: string[];
   turnaroundTime?: string;
   commonSymptoms?: string[];
   idealFor: string;
 }
 
+export type ServiceItem = ServiceMeta & ServiceContent;
+
 export interface TrustPillar {
   title: string;
   subtitle: string;
   iconName: string;
   description: string;
-}
-
-export interface WhyChoosePoint {
-  number: string;
-  title: string;
-  description: string;
-  highlight: string;
-  iconName: string;
-}
-
-export interface ProcessStep {
-  step: string;
-  title: string;
-  description: string;
-  detail: string;
-  iconName: string;
 }
 
 export interface Testimonial {
@@ -56,12 +49,4 @@ export interface LeadFormData {
   transmissionType: string;
   urgency: string;
   message: string;
-}
-
-export interface TransmissionSymptom {
-  id: string;
-  name: string;
-  severity: 'high' | 'medium' | 'critical';
-  description: string;
-  recommendation: string;
 }
