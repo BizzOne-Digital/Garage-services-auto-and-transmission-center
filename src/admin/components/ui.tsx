@@ -246,36 +246,54 @@ export const Modal: React.FC<{
       if (event.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+
+    // Stop the page behind the dialog from scrolling while it is open.
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [open, onClose]);
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-        className={`w-full ${wide ? 'max-w-3xl' : 'max-w-lg'} my-8 rounded-2xl bg-[#121212] border border-neutral-700 shadow-2xl`}
-      >
-        <header className="flex items-center justify-between gap-4 px-5 py-4 border-b border-neutral-800">
-          <h2 className="font-heading text-sm font-bold uppercase tracking-wider text-white">{title}</h2>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close dialog"
-            className="p-1.5 rounded-lg text-neutral-500 hover:text-white hover:bg-neutral-800 transition-colors"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </header>
-        <div className="px-5 py-5">{children}</div>
-        {footer && (
-          <footer className="flex items-center justify-end gap-2 px-5 py-4 border-t border-neutral-800">
-            {footer}
-          </footer>
-        )}
+    // The scroll container must not also be the flex-centering element: centering an
+    // over-tall child inside an `overflow-y-auto` box puts its top out of reach.
+    // The inner `min-h-full` wrapper centres short dialogs and grows for tall ones.
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md">
+      <div className="flex min-h-full items-center justify-center p-4">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={title}
+          className={`w-full ${wide ? 'max-w-3xl' : 'max-w-lg'} my-4 flex flex-col max-h-[calc(100vh-2rem)] rounded-2xl bg-[#121212] border border-neutral-700 shadow-2xl`}
+        >
+          <header className="flex items-center justify-between gap-4 px-5 py-4 border-b border-neutral-800 shrink-0">
+            <h2 className="font-heading text-sm font-bold uppercase tracking-wider text-white">
+              {title}
+            </h2>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close dialog"
+              className="p-1.5 rounded-lg text-neutral-500 hover:text-white hover:bg-neutral-800 transition-colors shrink-0"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </header>
+
+          {/* Long forms scroll here, so the title and the action buttons stay visible. */}
+          <div className="px-5 py-5 overflow-y-auto flex-1 min-h-0">{children}</div>
+
+          {footer && (
+            <footer className="flex items-center justify-end gap-2 px-5 py-4 border-t border-neutral-800 shrink-0">
+              {footer}
+            </footer>
+          )}
+        </div>
       </div>
     </div>
   );

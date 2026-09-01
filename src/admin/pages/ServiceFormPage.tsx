@@ -212,11 +212,7 @@ export const ServiceFormPage: React.FC<{ serviceId?: string }> = ({ serviceId })
                 />
                 <FieldError message={fields['videoUrl']} />
                 <p className="text-[11px] text-neutral-600 mt-2 leading-relaxed">
-                  Pick assets from the{' '}
-                  <Link to="/admin/media" className="text-[#F5C400] hover:underline">
-                    Media library
-                  </Link>{' '}
-                  and paste the URL here.
+                  Paste the URL of an externally hosted video.
                 </p>
               </div>
             </div>

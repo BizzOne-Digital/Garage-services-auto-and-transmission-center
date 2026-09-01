@@ -41,13 +41,4 @@ export const env = {
 
   siteUrl: optional(process.env.SITE_URL, 'http://localhost:3000'),
 
-  cloudinary: {
-    cloudName: optional(process.env.CLOUDINARY_CLOUD_NAME),
-    apiKey: optional(process.env.CLOUDINARY_API_KEY),
-    apiSecret: optional(process.env.CLOUDINARY_API_SECRET),
-    folder: optional(process.env.CLOUDINARY_FOLDER, 'garage-services'),
-    get configured() {
-      return Boolean(this.cloudName && this.apiKey && this.apiSecret);
-    },
-  },
 };

@@ -3,8 +3,8 @@ import {
   ArrowUpRight,
   FileEdit,
   HelpCircle,
-  Image as ImageIcon,
   MessageSquareQuote,
+  ShieldCheck,
   Sparkles,
   Tags,
   Users,
@@ -109,11 +109,11 @@ export const DashboardPage: React.FC = () => {
               to="/admin/categories"
             />
             <StatCard
-              label="Media"
-              value={data.media}
-              hint="Images and videos"
-              icon={ImageIcon}
-              to="/admin/media"
+              label="Testimonials"
+              value={data.testimonials.total}
+              hint={`${data.testimonials.published} published`}
+              icon={MessageSquareQuote}
+              to="/admin/testimonials"
             />
           </div>
 
@@ -125,11 +125,11 @@ export const DashboardPage: React.FC = () => {
               icon={Sparkles}
             />
             <StatCard
-              label="Testimonials"
-              value={data.testimonials.total}
-              hint={`${data.testimonials.published} published`}
-              icon={MessageSquareQuote}
-              to="/admin/testimonials"
+              label="Trust pillars"
+              value={data.trustPillars}
+              hint="Value props under the hero"
+              icon={ShieldCheck}
+              to="/admin/trust-pillars"
             />
             <StatCard
               label="FAQs"

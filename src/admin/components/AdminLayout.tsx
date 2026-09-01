@@ -3,7 +3,6 @@ import {
   ChevronDown,
   ExternalLink,
   HelpCircle,
-  Image as ImageIcon,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -47,7 +46,6 @@ const NAV_GROUPS: { title: string; items: NavItem[] }[] = [
     title: 'Business',
     items: [
       { href: '/admin/leads', label: 'Leads', icon: Users },
-      { href: '/admin/media', label: 'Media', icon: ImageIcon },
       { href: '/admin/settings', label: 'Settings', icon: SettingsIcon },
     ],
   },

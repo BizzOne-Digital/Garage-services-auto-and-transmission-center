@@ -132,24 +132,6 @@ export interface LeadDTO {
   updatedAt: string;
 }
 
-export type MediaKind = 'image' | 'video';
-
-export interface MediaDTO {
-  _id: string;
-  title: string;
-  kind: MediaKind;
-  url: string;
-  provider: 'cloudinary' | 'external';
-  publicId: string;
-  format: string;
-  bytes: number;
-  width: number;
-  height: number;
-  alt: Localized;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface AdminUserDTO {
   _id: string;
   email: string;
@@ -174,7 +156,6 @@ export interface DashboardStats {
   testimonials: { total: number; published: number };
   faqs: { total: number; published: number };
   trustPillars: number;
-  media: number;
   leads: { total: number; new: number; last7Days: number };
   recentServices: Pick<ServiceDTO, '_id' | 'slug' | 'title' | 'published' | 'createdAt' | 'imageUrl' | 'categoryKey'>[];
   recentLeads: Pick<LeadDTO, '_id' | 'fullName' | 'serviceNeeded' | 'status' | 'createdAt' | 'phone'>[];

@@ -8,7 +8,6 @@ import { DashboardPage } from './pages/DashboardPage';
 import { FaqsPage } from './pages/FaqsPage';
 import { LeadsPage } from './pages/LeadsPage';
 import { LoginPage } from './pages/LoginPage';
-import { MediaPage } from './pages/MediaPage';
 import { ServiceFormPage } from './pages/ServiceFormPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { SettingsPage } from './pages/SettingsPage';
@@ -35,7 +34,6 @@ const resolveRoute = (pathname: string): React.ReactNode => {
   if (matchRoute('/admin/faqs', pathname)) return <FaqsPage />;
   if (matchRoute('/admin/trust-pillars', pathname)) return <TrustPillarsPage />;
   if (matchRoute('/admin/leads', pathname)) return <LeadsPage />;
-  if (matchRoute('/admin/media', pathname)) return <MediaPage />;
   if (matchRoute('/admin/settings', pathname)) return <SettingsPage />;
 
   return null;

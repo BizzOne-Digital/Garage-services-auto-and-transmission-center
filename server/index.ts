@@ -16,8 +16,7 @@ export const createApp = () => {
   const app = express();
 
   app.set('trust proxy', 1);
-  // Base64 media payloads are posted as JSON, so the limit has to allow them.
-  app.use(express.json({ limit: '12mb' }));
+  app.use(express.json({ limit: '1mb' }));
   app.disable('x-powered-by');
 
   app.get('/api/health', (_req, res) => {

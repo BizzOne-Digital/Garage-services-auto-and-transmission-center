@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 import { requireAdmin } from '../auth.ts';
-import { destroyOnCloudinary, uploadToCloudinary } from '../cloudinary.ts';
 import { env } from '../env.ts';
 import {
   asyncRoute,
@@ -20,7 +19,6 @@ import {
 import { Category } from '../models/Category.ts';
 import { Faq } from '../models/Faq.ts';
 import { Lead } from '../models/Lead.ts';
-import { Media } from '../models/Media.ts';
 import { Service } from '../models/Service.ts';
 import { Setting, SETTINGS_KEY } from '../models/Setting.ts';
 import { Testimonial } from '../models/Testimonial.ts';
@@ -288,102 +286,6 @@ adminRouter.delete(
 );
 
 /* ------------------------------------------------------------------ */
-/* Media library                                                       */
-/* ------------------------------------------------------------------ */
-
-// Booleans only — Cloudinary keys never reach the browser.
-adminRouter.get('/media/config', (_req, res) => {
-  sendOk(res, { uploadsEnabled: env.cloudinary.configured });
-});
-
-adminRouter.get(
-  '/media',
-  asyncRoute(async (req, res) => {
-    const page = Math.max(1, cleanNumber(req.query.page, 1));
-    const pageSize = Math.min(60, Math.max(1, cleanNumber(req.query.pageSize, 24)));
-    const kind = cleanText(req.query.kind, 10);
-    const search = cleanText(req.query.search, 120);
-
-    const filter: Record<string, unknown> = {};
-    if (kind === 'image' || kind === 'video') filter.kind = kind;
-    if (search) filter.title = new RegExp(escapeRegex(search), 'i');
-
-    const [items, total] = await Promise.all([
-      Media.find(filter).sort({ createdAt: -1 }).skip((page - 1) * pageSize).limit(pageSize).lean(),
-      Media.countDocuments(filter),
-    ]);
-
-    sendOk(res, {
-      items: JSON.parse(JSON.stringify(items)),
-      total,
-      page,
-      pageSize,
-      pages: Math.max(1, Math.ceil(total / pageSize)),
-    });
-  })
-);
-
-/** Registers an externally hosted asset — no upload service required. */
-adminRouter.post(
-  '/media',
-  asyncRoute(async (req, res) => {
-    const body = (req.body ?? {}) as Record<string, unknown>;
-    const url = cleanUrl(body.url);
-    if (!url) throw badRequest('A media URL is required.', { url: 'Required.' });
-    const kind = body.kind === 'video' ? 'video' : 'image';
-
-    const doc = await Media.create({
-      title: cleanText(body.title, 160) || url.split('/').pop()?.slice(0, 80) || 'Untitled',
-      kind,
-      url,
-      provider: 'external',
-      alt: cleanLocalized(body.alt, 200),
-    });
-    sendOk(res, JSON.parse(JSON.stringify(doc.toJSON())), 201);
-  })
-);
-
-/** Uploads a base64 payload to Cloudinary and records it in the library. */
-adminRouter.post(
-  '/media/upload',
-  asyncRoute(async (req, res) => {
-    const body = (req.body ?? {}) as Record<string, unknown>;
-    const file = typeof body.file === 'string' ? body.file : '';
-    if (!file) throw badRequest('No file received.');
-    const kind = body.kind === 'video' ? 'video' : 'image';
-
-    const uploaded = await uploadToCloudinary(file, kind);
-    const doc = await Media.create({
-      title: cleanText(body.title, 160) || uploaded.publicId.split('/').pop() || 'Untitled',
-      kind,
-      url: uploaded.url,
-      provider: 'cloudinary',
-      publicId: uploaded.publicId,
-      format: uploaded.format,
-      bytes: uploaded.bytes,
-      width: uploaded.width,
-      height: uploaded.height,
-      alt: cleanLocalized(body.alt, 200),
-    });
-    sendOk(res, JSON.parse(JSON.stringify(doc.toJSON())), 201);
-  })
-);
-
-adminRouter.delete(
-  '/media/:id',
-  asyncRoute(async (req, res) => {
-    if (!mongoose.isValidObjectId(req.params.id)) throw notFound('Media not found.');
-    const doc = await Media.findByIdAndDelete(req.params.id).lean();
-    if (!doc) throw notFound('Media not found.');
-    const asset = doc as { publicId?: string; provider?: string; kind?: 'image' | 'video' };
-    if (asset.provider === 'cloudinary' && asset.publicId) {
-      await destroyOnCloudinary(asset.publicId, asset.kind ?? 'image');
-    }
-    sendOk(res, { deleted: true });
-  })
-);
-
-/* ------------------------------------------------------------------ */
 /* Dashboard statistics                                                */
 /* ------------------------------------------------------------------ */
 
@@ -402,7 +304,6 @@ adminRouter.get(
       faqsTotal,
       faqsPublished,
       trustPillars,
-      media,
       leadsTotal,
       leadsNew,
       leadsRecent,
@@ -418,7 +319,6 @@ adminRouter.get(
       Faq.countDocuments({}),
       Faq.countDocuments({ published: true }),
       TrustPillar.countDocuments({}),
-      Media.countDocuments({}),
       Lead.countDocuments({}),
       Lead.countDocuments({ status: 'new' }),
       Lead.countDocuments({ createdAt: { $gte: sevenDaysAgo } }),
@@ -445,7 +345,6 @@ adminRouter.get(
       testimonials: { total: testimonialsTotal, published: testimonialsPublished },
       faqs: { total: faqsTotal, published: faqsPublished },
       trustPillars,
-      media,
       leads: { total: leadsTotal, new: leadsNew, last7Days: leadsRecent },
       recentServices: JSON.parse(JSON.stringify(recentServices)),
       recentLeads: JSON.parse(JSON.stringify(recentLeads)),

@@ -5,7 +5,6 @@ import type {
   DashboardStats,
   FaqDTO,
   LeadDTO,
-  MediaDTO,
   Paginated,
   ServiceDTO,
   SettingsDTO,
@@ -70,14 +69,4 @@ export const adminApi = {
       apiRequest<{ deleted: boolean }>(`/api/admin/leads/${id}`, { method: 'DELETE' }),
   },
 
-  media: {
-    config: () => apiRequest<{ uploadsEnabled: boolean }>('/api/admin/media/config'),
-    list: (query: ListQuery = {}) => apiRequest<Paginated<MediaDTO>>(`/api/admin/media${buildQuery(query)}`),
-    createFromUrl: (body: { url: string; kind: 'image' | 'video'; title?: string }) =>
-      apiRequest<MediaDTO>('/api/admin/media', { method: 'POST', body }),
-    upload: (body: { file: string; kind: 'image' | 'video'; title?: string }) =>
-      apiRequest<MediaDTO>('/api/admin/media/upload', { method: 'POST', body }),
-    remove: (id: string) =>
-      apiRequest<{ deleted: boolean }>(`/api/admin/media/${id}`, { method: 'DELETE' }),
-  },
 };

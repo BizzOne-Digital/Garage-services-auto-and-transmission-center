@@ -37,8 +37,8 @@ Generate a session secret:
 node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 ```
 
-Optional variables (`PORT`, `SESSION_TTL_DAYS`, `MONGODB_DB_NAME`, `SITE_URL`, the
-`CLOUDINARY_*` group) are documented inline in `.env.example`.
+Optional variables (`PORT`, `SESSION_TTL_DAYS`, `MONGODB_DB_NAME`, `SITE_URL`) are
+documented inline in `.env.example`.
 
 `.env` is git-ignored. No secret is ever exposed to the browser.
 
@@ -106,7 +106,6 @@ so a single process handles the website, `/admin` and the API.
 | `/admin/faqs` | Pricing-section questions. |
 | `/admin/trust-pillars` | The four value pillars under the hero. |
 | `/admin/leads` | Quote requests from the contact form and quote pop-up. |
-| `/admin/media` | Image and video library. |
 | `/admin/settings` | Business identity, contact details, imagery, password change. |
 
 Public routes are untouched: `/` with its `#home`, `#about`, `#services`, `#pricing`,
@@ -134,7 +133,6 @@ Public routes are untouched: `/` with its `#home`, `#about`, `#services`, `#pric
 | `GET/PATCH/DELETE` | the same collections with `/:id` |
 | `GET/PUT` | `/api/admin/settings` |
 | `GET/PATCH/DELETE` | `/api/admin/leads`, `/api/admin/leads/:id` |
-| `GET/POST/DELETE` | `/api/admin/media`, `/api/admin/media/upload`, `/api/admin/media/:id` |
 
 Every response uses the same envelope: `{ ok: true, data }` or `{ ok: false, error, fields? }`.
 
@@ -152,25 +150,13 @@ Every response uses the same envelope: `{ ok: true, data }` or `{ ok: false, err
 | `trustpillars` | Bilingual value pillars with icon names. |
 | `settings` | Single document: business identity, contact details, social links, imagery. |
 | `leads` | Quote requests with status (`new` → `contacted` → `quoted` → `won`/`lost`) and notes. |
-| `media` | Image and video library. Videos are a distinct `kind` and never mix with images. |
 
 All collections carry `createdAt` / `updatedAt`. Indexes exist on `slug`, `key`,
 `categoryKey`, `published + order`, and `leads.createdAt` / `leads.status`.
 
 ---
 
-## 7. Media
-
-The library works with no external service: paste a URL and it is registered.
-
-Direct file upload appears only when Cloudinary is configured
-(`CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`). Uploads go
-through the server — the browser never sees the credentials. Files are capped at 8 MB;
-larger assets should be hosted externally and added by URL.
-
----
-
-## 8. Notes for editors
+## 7. Notes for editors
 
 - Every text field is captured in **French and English**. French is the site default; if
   an English value is left empty the French one is shown, and vice versa.
@@ -178,5 +164,7 @@ larger assets should be hosted externally and added by URL.
   immediately without deleting it.
 - The public payload is cached for 60 seconds server-side, but any admin save clears that
   cache at once. Browsers may hold their own copy for up to 30 seconds.
+- Images (logo, hero, about, service) are entered as **URLs**. Host the file anywhere
+  publicly reachable and paste the link into the field.
 - Deleting a category does not delete its services — reassign them first, or they will not
   appear under any filter tab.

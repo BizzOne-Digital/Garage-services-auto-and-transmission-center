@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, Pencil, Plus, Search, Trash2, Wrench } from 'lucide-react';
-import type { CategoryDTO, ServiceDTO } from '../../lib/content-types';
+import type { CategoryDTO, Localized, LocalizedList, ServiceDTO } from '../../lib/content-types';
 import { Link } from '../../lib/router';
 import { adminApi } from '../api';
 import { describeError, useAuth } from '../AuthContext';
@@ -12,6 +12,7 @@ import {
   EmptyState,
   ErrorState,
   Input,
+  Modal,
   Pagination,
   Panel,
   Select,
@@ -23,6 +24,61 @@ import { useToast } from '../ToastContext';
 const formatDate = (value: string): string =>
   new Date(value).toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' });
 
+/** Read-only FR/EN pair shown in the service preview dialog. */
+const PreviewField: React.FC<{ label: string; value?: Localized }> = ({ label, value }) => {
+  if (!value?.fr && !value?.en) return null;
+  return (
+    <div>
+      <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-600 mb-1.5">
+        {label}
+      </p>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {(['fr', 'en'] as const).map(lang => (
+          <div key={lang} className="rounded-xl bg-[#0F0F0F] border border-neutral-800 p-3">
+            <span className="block text-[10px] font-mono uppercase tracking-widest text-neutral-700 mb-1">
+              {lang === 'fr' ? 'Français' : 'English'}
+            </span>
+            <p className="text-xs text-neutral-300 leading-relaxed whitespace-pre-wrap">
+              {value[lang] || '—'}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const PreviewList: React.FC<{ label: string; value?: LocalizedList }> = ({ label, value }) => {
+  if (!value?.fr?.length && !value?.en?.length) return null;
+  return (
+    <div>
+      <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-600 mb-1.5">
+        {label}
+      </p>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {(['fr', 'en'] as const).map(lang => (
+          <div key={lang} className="rounded-xl bg-[#0F0F0F] border border-neutral-800 p-3">
+            <span className="block text-[10px] font-mono uppercase tracking-widest text-neutral-700 mb-1.5">
+              {lang === 'fr' ? 'Français' : 'English'}
+            </span>
+            <ul className="space-y-1">
+              {(value[lang] ?? []).map((entry, index) => (
+                <li key={index} className="flex gap-2 text-xs text-neutral-300 leading-relaxed">
+                  <span className="text-[#F5C400] shrink-0">·</span>
+                  <span>{entry}</span>
+                </li>
+              ))}
+              {(value[lang] ?? []).length === 0 && (
+                <li className="text-xs text-neutral-600">—</li>
+              )}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export const ServicesPage: React.FC = () => {
   const toast = useToast();
   const { markSignedOut } = useAuth();
@@ -33,6 +89,7 @@ export const ServicesPage: React.FC = () => {
   const [published, setPublished] = useState('all');
   const [pendingDelete, setPendingDelete] = useState<ServiceDTO | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [preview, setPreview] = useState<ServiceDTO | null>(null);
 
   const debouncedSearch = useDebounced(search);
 
@@ -193,14 +250,15 @@ export const ServicesPage: React.FC = () => {
                       </td>
                       <td className="px-5 py-3.5">
                         <div className="flex items-center justify-end gap-1">
-                          <a
-                            href={`/#services`}
-                            title="View on website"
-                            aria-label={`View ${service.slug} on the website`}
+                          <button
+                            type="button"
+                            onClick={() => setPreview(service)}
+                            title="View details"
+                            aria-label={`View ${service.slug}`}
                             className="p-2 rounded-lg text-neutral-500 hover:text-[#F5C400] hover:bg-[#1A1A1A] transition-colors"
                           >
                             <Eye className="w-3.5 h-3.5" />
-                          </a>
+                          </button>
                           <Link
                             to={`/admin/services/${service._id}/edit`}
                             title="Edit"
@@ -229,6 +287,73 @@ export const ServicesPage: React.FC = () => {
           </>
         )}
       </Panel>
+
+      <Modal
+        open={Boolean(preview)}
+        wide
+        title={preview ? preview.title?.fr || preview.title?.en || preview.slug : 'Service'}
+        onClose={() => setPreview(null)}
+        footer={
+          <>
+            <Button variant="secondary" size="sm" onClick={() => setPreview(null)}>
+              Close
+            </Button>
+            {preview && (
+              <Link to={`/admin/services/${preview._id}/edit`}>
+                <Button size="sm">
+                  <Pencil className="w-3.5 h-3.5" />
+                  Edit service
+                </Button>
+              </Link>
+            )}
+          </>
+        }
+      >
+        {preview && (
+          <div className="space-y-5">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <Badge tone={preview.published ? 'green' : 'neutral'}>
+                {preview.published ? 'Published' : 'Draft'}
+              </Badge>
+              {preview.featured && <Badge tone="yellow">Featured</Badge>}
+              <Badge>{preview.categoryKey}</Badge>
+              <span className="text-[11px] font-mono text-neutral-600">/{preview.slug}</span>
+            </div>
+
+            {preview.imageUrl && (
+              <img
+                src={preview.imageUrl}
+                alt=""
+                className="w-full h-48 object-cover rounded-xl border border-neutral-800"
+              />
+            )}
+
+            <PreviewField label="Title" value={preview.title} />
+            <PreviewField label="Short description" value={preview.shortDesc} />
+            <PreviewField label="Full description" value={preview.fullDesc} />
+            <PreviewList label="Scope of work" value={preview.features} />
+            <PreviewList label="Common symptoms" value={preview.commonSymptoms} />
+            <PreviewField label="Turnaround time" value={preview.turnaroundTime} />
+            <PreviewField label="Ideal for" value={preview.idealFor} />
+
+            {preview.videoUrl && (
+              <div>
+                <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-600 mb-1.5">
+                  Video
+                </p>
+                <a
+                  href={preview.videoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs text-[#F5C400] hover:underline break-all"
+                >
+                  {preview.videoUrl}
+                </a>
+              </div>
+            )}
+          </div>
+        )}
+      </Modal>
 
       <ConfirmDialog
         open={Boolean(pendingDelete)}
