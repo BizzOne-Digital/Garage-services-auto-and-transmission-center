@@ -62,9 +62,44 @@ npm run seed -- --force
 
 ---
 
+## 2b. Deployment (Vercel)
+
+`vercel.json` rewrites `/api/*` to the serverless function and everything else to
+`index.html`, so client-side routes such as `/admin/login` resolve instead of 404ing.
+
+The function is a **pre-bundled** file, `api/index.js`, generated from `server/` by
+esbuild. Vercel's Node builder transpiles TypeScript file-by-file without rewriting
+import specifiers, which breaks this project's `./db.ts` style imports at runtime;
+bundling ahead of time avoids that entirely.
+
+**After changing anything under `server/`, regenerate it:**
+
+```bash
+npm run build:api
+```
+
+Commit the result. Vercel's build command (`npm run build && npm run build:api`) also
+regenerates it on every deploy, but keeping the committed copy current means the file
+in git always matches the source.
+
+Required environment variables in the Vercel project: `MONGODB_URI`, `ADMIN_EMAIL`,
+`ADMIN_PASSWORD`, `AUTH_SECRET`, and `NODE_ENV=production`. MongoDB Atlas must also
+allow Vercel's IPs (functions have no fixed IP).
+
+Check a deployment with `/api/health` — it should report `database: connected`.
+
+---
+
 ## 3. Run locally
 
-Two processes, two terminals.
+Both the website and the API must be running. The simplest way is one command:
+
+```bash
+npm run dev:all
+```
+
+It starts both and prefixes their output with `[web]` and `[api]`. Stopping it stops
+both. To run them separately in two terminals instead:
 
 ```bash
 npm run dev:api
@@ -73,6 +108,8 @@ npm run dev:api
 ```bash
 npm run dev
 ```
+
+If `/api` calls fail with `ECONNREFUSED`, the API process is not running.
 
 - Website: http://localhost:3000
 - Admin portal: http://localhost:3000/admin
