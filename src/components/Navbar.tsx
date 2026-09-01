@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Phone, Menu, X, ArrowUpRight, ChevronRight } from 'lucide-react';
 import { Logo } from './Logo';
@@ -15,6 +15,34 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  // The header height varies with viewport width and language (the logo wraps),
+  // so the mobile drawer is offset by the measured height instead of a fixed value.
+  const headerRef = useRef<HTMLElement | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(60);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const measure = () => setHeaderHeight(header.getBoundingClientRect().height);
+    const frame = requestAnimationFrame(measure);
+    document.fonts?.ready.then(measure).catch(() => {});
+
+    // Observe the border box: the header also changes height purely through its
+    // padding when scrolled, which a content-box observation would not report.
+    const observer = new ResizeObserver(measure);
+    observer.observe(header, { box: 'border-box' });
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', measure);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+      window.removeEventListener('scroll', measure);
+    };
+  }, [t]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,6 +96,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
     <>
       <header
         id="main-navbar"
+        ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? 'bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/10 shadow-2xl py-3.5'
@@ -138,10 +167,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             </button>
           </div>
 
-          {/* Mobile Actions: Language Toggle + Phone Icon + Hamburger */}
+          {/* Mobile Actions: Phone Icon + Hamburger (language switcher lives in the drawer) */}
           <div className="flex lg:hidden items-center gap-2">
-            <LanguageToggle />
-
             <a
               href={`tel:${BUSINESS_INFO.phoneRaw}`}
               id="mobile-header-call-btn"
@@ -174,7 +201,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-x-0 top-[60px] z-40 bg-[#0E0E0E]/98 border-b border-neutral-800 shadow-2xl backdrop-blur-xl px-4 py-6 xl:hidden max-h-[calc(100vh-60px)] overflow-y-auto"
+            style={{ top: headerHeight, maxHeight: `calc(100vh - ${headerHeight}px)` }}
+            className="fixed inset-x-0 z-40 bg-[#0E0E0E]/98 border-b border-neutral-800 shadow-2xl backdrop-blur-xl px-4 py-6 xl:hidden overflow-y-auto"
           >
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
