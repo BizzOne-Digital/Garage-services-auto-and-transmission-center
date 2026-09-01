@@ -7,12 +7,20 @@ import { HttpError } from './http.ts';
 import { adminRouter } from './routes/admin.ts';
 import { authRouter } from './routes/auth.ts';
 import { publicRouter } from './routes/public.ts';
-import { ensureAdminUser } from './seed.ts';
+import { ensureAdminUser, ensureAdminUserOnce } from './seed.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '../dist');
 
-export const createApp = () => {
+export interface CreateAppOptions {
+  /**
+   * Serve the built SPA from ./dist. True in production for the standalone
+   * Node server; false on serverless platforms where the CDN serves the files.
+   */
+  serveStatic?: boolean;
+}
+
+export const createApp = ({ serveStatic = env.isProduction }: CreateAppOptions = {}) => {
   const app = express();
 
   app.set('trust proxy', 1);
@@ -26,7 +34,7 @@ export const createApp = () => {
   // Every API request needs the database; fail fast with a clean 503 instead of hanging.
   app.use('/api', (_req, res, next) => {
     connectToDatabase().then(
-      () => next(),
+      () => ensureAdminUserOnce().then(() => next()),
       () => {
         res.status(503).json({
           ok: false,
@@ -45,7 +53,7 @@ export const createApp = () => {
   });
 
   // In production the same process serves the built SPA (public site + /admin).
-  if (env.isProduction) {
+  if (serveStatic) {
     app.use(express.static(distDir, { index: false, maxAge: '1h' }));
     app.get('*', (_req, res) => {
       res.sendFile(path.join(distDir, 'index.html'));

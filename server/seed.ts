@@ -56,6 +56,24 @@ export const ensureAdminUser = async (): Promise<void> => {
   console.log(`[seed] created admin account for ${email}`);
 };
 
+/**
+ * Same as ensureAdminUser, but runs at most once per process and never throws.
+ * Serverless platforms have no boot step, so the bootstrap account is created
+ * on the first API request of a cold start instead.
+ */
+let adminBootstrap: Promise<void> | null = null;
+
+export const ensureAdminUserOnce = async (): Promise<void> => {
+  if (!adminBootstrap) {
+    adminBootstrap = ensureAdminUser().catch(error => {
+      // Retry on a later request instead of caching the failure forever.
+      adminBootstrap = null;
+      console.error('[seed] admin bootstrap failed:', (error as Error).message);
+    });
+  }
+  return adminBootstrap;
+};
+
 const upsert = async (
   model: { findOne: Function; create: Function; updateOne: Function },
   query: Record<string, unknown>,
