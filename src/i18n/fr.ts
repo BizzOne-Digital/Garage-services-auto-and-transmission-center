@@ -452,6 +452,8 @@ export const fr = {
       emailInvalid: 'Veuillez entrer une adresse courriel valide.',
       vehicle: 'Veuillez préciser la marque et le modèle de votre véhicule.',
       vehicleShort: 'La marque et le modèle sont requis.',
+      submitFailed:
+        "Nous n'avons pas pu envoyer votre demande. Veuillez réessayer ou appeler Abdul directement.",
     },
   },
 

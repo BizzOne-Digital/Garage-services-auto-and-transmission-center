@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Star, ShieldCheck, Quote, UserCheck } from 'lucide-react';
-import { BUSINESS_INFO } from '../lib/constants';
 import { useLanguage } from '../i18n/LanguageContext';
-import { useTestimonials } from '../i18n/useContent';
+import { useBusiness, useTestimonials } from '../i18n/useContent';
 
 export const Testimonials: React.FC = () => {
   const { t, format } = useLanguage();
+  const business = useBusiness();
   const testimonials = useTestimonials();
 
   return (
@@ -27,7 +27,7 @@ export const Testimonials: React.FC = () => {
             {t.testimonials.headline} <span className="text-[#F5C400]">{t.testimonials.headlineAccent}</span>
           </h2>
           <p className="text-sm sm:text-base text-neutral-400 mt-3 font-normal leading-relaxed">
-            {format(t.testimonials.intro, { shortName: BUSINESS_INFO.shortName })}
+            {format(t.testimonials.intro, { shortName: business.shortName })}
           </p>
         </div>
 

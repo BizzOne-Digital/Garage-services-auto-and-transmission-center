@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Phone, Send, CheckCircle } from 'lucide-react';
-import { BUSINESS_INFO } from '../lib/constants';
 import { LeadFormData } from '../types';
 import { useLanguage } from '../i18n/LanguageContext';
-import { useServices } from '../i18n/useContent';
+import { ApiError, submitLead } from '../lib/leads';
+import { useBusiness, useServices } from '../i18n/useContent';
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -13,7 +13,8 @@ interface QuoteModalProps {
 }
 
 export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initialServiceId }) => {
-  const { t, format } = useLanguage();
+  const { t, format, lang } = useLanguage();
+  const business = useBusiness();
   const services = useServices();
   const [formData, setFormData] = useState<LeadFormData>({
     fullName: '',
@@ -30,6 +31,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof LeadFormData, string>>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (initialServiceId) {
@@ -57,19 +59,30 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    setSubmitError(null);
+
+    try {
+      await submitLead(formData, 'quote-modal', lang);
       setSubmitted(true);
-      console.log('Modal quote submission:', formData);
-    }, 700);
+    } catch (error) {
+      if (error instanceof ApiError && Object.keys(error.fields).length) {
+        setErrors(error.fields as Partial<Record<keyof LeadFormData, string>>);
+        setSubmitError(error.message);
+      } else {
+        setSubmitError(error instanceof ApiError ? error.message : t.contact.errors.submitFailed);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleResetAndClose = () => {
     setSubmitted(false);
+    setSubmitError(null);
     onClose();
   };
 
@@ -112,7 +125,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a
-                    href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                    href={`tel:${business.phoneRaw}`}
                     className="px-5 py-2.5 rounded-xl bg-[#F5C400] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2"
                   >
                     <Phone className="w-4 h-4" />
@@ -250,6 +263,15 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                       className="w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border border-neutral-700 text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400]"
                     />
                   </div>
+
+                  {submitError && (
+                    <p
+                      role="alert"
+                      className="px-3.5 py-2.5 rounded-xl bg-red-500/10 border border-red-500/40 text-[11px] text-red-300"
+                    >
+                      {submitError}
+                    </p>
+                  )}
 
                   <button
                     type="submit"

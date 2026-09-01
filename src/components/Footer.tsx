@@ -1,9 +1,8 @@
 import React from 'react';
 import { Phone, ArrowUpRight, ShieldCheck, ArrowUp } from 'lucide-react';
 import { Logo } from './Logo';
-import { BUSINESS_INFO } from '../lib/constants';
 import { useLanguage } from '../i18n/LanguageContext';
-import { useServices } from '../i18n/useContent';
+import { useBusiness, useServices } from '../i18n/useContent';
 
 interface FooterProps {
   onOpenQuoteModal: (serviceId?: string) => void;
@@ -11,6 +10,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
   const { t, format } = useLanguage();
+  const business = useBusiness();
   const services = useServices();
 
   const scrollToTop = () => {
@@ -48,11 +48,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
               <ArrowUpRight className="w-4 h-4" />
             </button>
             <a
-              href={`tel:${BUSINESS_INFO.phoneRaw}`}
+              href={`tel:${business.phoneRaw}`}
               className="w-full sm:w-auto px-6 py-3.5 bg-[#181818] hover:bg-[#222222] text-white border border-white/10 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 text-[#F5C400]" />
-              <span>{t.common.call} {BUSINESS_INFO.phone}</span>
+              <span>{t.common.call} {business.phone}</span>
             </a>
           </div>
         </div>
@@ -120,32 +120,32 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
             <div className="space-y-3 text-xs">
               <div>
                 <span className="text-[10px] uppercase font-mono text-neutral-500 block">{t.footer.leadContact}</span>
-                <span className="font-bold text-white">{BUSINESS_INFO.contactPerson}</span>
+                <span className="font-bold text-white">{business.contactPerson}</span>
               </div>
 
               <div>
                 <span className="text-[10px] uppercase font-mono text-neutral-500 block">{t.footer.phone}</span>
                 <a
-                  href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                  href={`tel:${business.phoneRaw}`}
                   className="font-bold text-[#F5C400] hover:underline"
                 >
-                  {BUSINESS_INFO.phone}
+                  {business.phone}
                 </a>
               </div>
 
               <div>
                 <span className="text-[10px] uppercase font-mono text-neutral-500 block">{t.footer.email}</span>
                 <a
-                  href={`mailto:${BUSINESS_INFO.email}`}
+                  href={`mailto:${business.email}`}
                   className="text-neutral-300 hover:text-white break-all"
                 >
-                  {BUSINESS_INFO.email}
+                  {business.email}
                 </a>
               </div>
 
               <div>
                 <span className="text-[10px] uppercase font-mono text-neutral-500 block">{t.footer.social}</span>
-                <span className="text-neutral-400">{BUSINESS_INFO.socialMediaName}</span>
+                <span className="text-neutral-400">{business.socialMediaName}</span>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Wrench, Cpu, Activity, Disc, Flame, CheckCircle2, ArrowRight, Check, X, ShieldAlert, Sparkles } from 'lucide-react';
 import { ServiceItem } from '../types';
 import { useLanguage } from '../i18n/LanguageContext';
-import { useServices } from '../i18n/useContent';
+import { useCategories, useServices } from '../i18n/useContent';
 
 interface ServicesProps {
   onOpenQuoteModal: (serviceId?: string) => void;
@@ -12,6 +12,7 @@ interface ServicesProps {
 export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
   const { t, format } = useLanguage();
   const services = useServices();
+  const categories = useCategories();
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
 
@@ -73,9 +74,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
           <div className="flex flex-wrap items-center gap-2 bg-[#121212] p-1 border border-white/10 self-start md:self-auto">
             {[
               { id: 'all', label: t.services.filters.all },
-              { id: 'transmission', label: t.services.filters.transmission },
-              { id: 'mechanical', label: t.services.filters.mechanical },
-              { id: 'maintenance', label: t.services.filters.maintenance },
+              ...categories.map(category => ({ id: category.key, label: category.label })),
             ].map(tab => (
               <button
                 key={tab.id}

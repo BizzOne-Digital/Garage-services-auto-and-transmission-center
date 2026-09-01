@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Phone, Menu, X, ArrowUpRight, ChevronRight } from 'lucide-react';
 import { Logo } from './Logo';
 import { LanguageToggle } from './LanguageToggle';
-import { BUSINESS_INFO } from '../lib/constants';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useBusiness } from '../i18n/useContent';
 
 interface NavbarProps {
   onOpenQuoteModal: (serviceId?: string) => void;
@@ -12,6 +12,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
   const { t, format } = useLanguage();
+  const business = useBusiness();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -90,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
     }
   };
 
-  const callLabel = `${t.common.call} ${BUSINESS_INFO.phone}`;
+  const callLabel = `${t.common.call} ${business.phone}`;
 
   return (
     <>
@@ -148,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
 
             {/* Direct Phone Call Icon Link */}
             <a
-              href={`tel:${BUSINESS_INFO.phoneRaw}`}
+              href={`tel:${business.phoneRaw}`}
               id="navbar-phone-btn"
               className="p-2.5 bg-[#151515] hover:bg-[#F5C400] text-[#F5C400] hover:text-[#0A0A0A] border border-white/10 hover:border-[#F5C400] transition-all flex items-center justify-center shadow-md active:scale-95 group"
               title={callLabel}
@@ -170,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
           {/* Mobile Actions: Phone Icon + Hamburger (language switcher lives in the drawer) */}
           <div className="flex lg:hidden items-center gap-2">
             <a
-              href={`tel:${BUSINESS_INFO.phoneRaw}`}
+              href={`tel:${business.phoneRaw}`}
               id="mobile-header-call-btn"
               className="p-2 rounded-sm bg-[#F5C400] text-[#0A0A0A] font-bold flex items-center justify-center shadow-md active:scale-95 transition-transform"
               aria-label={callLabel}
@@ -233,11 +234,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
                 </div>
 
                 <a
-                  href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                  href={`tel:${business.phoneRaw}`}
                   className="flex items-center justify-center gap-2.5 w-full py-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white font-bold text-sm hover:border-[#F5C400] transition-colors"
                 >
                   <Phone className="w-4 h-4 text-[#F5C400]" />
-                  <span>{format(t.nav.callAbdulWithPhone, { phone: BUSINESS_INFO.phone })}</span>
+                  <span>{format(t.nav.callAbdulWithPhone, { phone: business.phone })}</span>
                 </a>
 
                 <button

@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Phone, ArrowRight } from 'lucide-react';
-import { BUSINESS_INFO } from '../lib/constants';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useBusiness } from '../i18n/useContent';
 
 interface LeadCTAProps {
   onOpenQuoteModal: () => void;
@@ -10,6 +10,7 @@ interface LeadCTAProps {
 
 export const LeadCTA: React.FC<LeadCTAProps> = ({ onOpenQuoteModal }) => {
   const { t } = useLanguage();
+  const business = useBusiness();
 
   return (
     <section className="py-16 sm:py-24 bg-[#0A0A0A] relative overflow-hidden">
@@ -53,12 +54,12 @@ export const LeadCTA: React.FC<LeadCTAProps> = ({ onOpenQuoteModal }) => {
               </button>
 
               <a
-                href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                href={`tel:${business.phoneRaw}`}
                 id="lead-cta-call-btn"
                 className="px-8 py-4 rounded-xl bg-[#181818] hover:bg-[#222222] text-white border border-neutral-700 hover:border-[#F5C400]/50 font-bold text-sm tracking-wide transition-all flex items-center justify-center gap-2.5 group"
               >
                 <Phone className="w-4 h-4 text-[#F5C400] group-hover:scale-110 transition-transform" />
-                <span>{t.common.call} {BUSINESS_INFO.phone}</span>
+                <span>{t.common.call} {business.phone}</span>
               </a>
             </div>
 

@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Phone, Mail, Share2, MapPin, Send, CheckCircle, AlertCircle, Clock } from 'lucide-react';
-import { BUSINESS_INFO } from '../lib/constants';
 import { LeadFormData } from '../types';
 import { useLanguage } from '../i18n/LanguageContext';
-import { useServices } from '../i18n/useContent';
+import { ApiError, submitLead } from '../lib/leads';
+import { useBusiness, useServices } from '../i18n/useContent';
 
 interface ContactProps {
   initialServiceId?: string;
 }
 
 export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
-  const { t, format } = useLanguage();
+  const { t, format, lang } = useLanguage();
+  const business = useBusiness();
   const services = useServices();
   const [formData, setFormData] = useState<LeadFormData>({
     fullName: '',
@@ -28,6 +29,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof LeadFormData, string>>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof LeadFormData, string>> = {};
@@ -56,18 +58,27 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setLoading(true);
+    setSubmitError(null);
 
-    // Simulate reliable submission & log for testing
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await submitLead(formData, 'contact-form', lang);
       setSubmitted(true);
-      console.log('Lead quote submitted successfully:', formData);
-    }, 800);
+    } catch (error) {
+      // Surface the server's field errors when it sent any, otherwise a generic notice.
+      if (error instanceof ApiError && Object.keys(error.fields).length) {
+        setErrors(error.fields as Partial<Record<keyof LeadFormData, string>>);
+        setSubmitError(error.message);
+      } else {
+        setSubmitError(error instanceof ApiError ? error.message : t.contact.errors.submitFailed);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
@@ -84,6 +95,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
       message: '',
     });
     setErrors({});
+    setSubmitError(null);
   };
 
   return (
@@ -119,13 +131,13 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                 {t.common.businessName}
               </h3>
               <p className="text-xs font-mono text-[#F5C400] mb-6">
-                {format(t.contact.attn, { name: BUSINESS_INFO.contactPerson })}
+                {format(t.contact.attn, { name: business.contactPerson })}
               </p>
 
               <div className="space-y-4">
                 {/* Phone */}
                 <a
-                  href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                  href={`tel:${business.phoneRaw}`}
                   id="contact-info-phone-link"
                   className="flex items-center gap-4 p-3.5 rounded-xl bg-[#141414] hover:bg-[#1E1E1E] border border-neutral-800 hover:border-[#F5C400]/40 transition-all group"
                 >
@@ -134,13 +146,13 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                   </div>
                   <div>
                     <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">{t.contact.phoneLabel}</span>
-                    <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors">{BUSINESS_INFO.phone}</span>
+                    <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors">{business.phone}</span>
                   </div>
                 </a>
 
                 {/* Email */}
                 <a
-                  href={`mailto:${BUSINESS_INFO.email}`}
+                  href={`mailto:${business.email}`}
                   id="contact-info-email-link"
                   className="flex items-center gap-4 p-3.5 rounded-xl bg-[#141414] hover:bg-[#1E1E1E] border border-neutral-800 hover:border-[#F5C400]/40 transition-all group"
                 >
@@ -149,7 +161,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                   </div>
                   <div>
                     <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">{t.contact.emailLabel}</span>
-                    <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors break-all">{BUSINESS_INFO.email}</span>
+                    <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors break-all">{business.email}</span>
                   </div>
                 </a>
 
@@ -160,7 +172,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                   </div>
                   <div>
                     <span className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 block">{t.contact.socialLabel}</span>
-                    <span className="text-xs font-semibold text-neutral-200">{BUSINESS_INFO.socialMediaName}</span>
+                    <span className="text-xs font-semibold text-neutral-200">{business.socialMediaName}</span>
                   </div>
                 </div>
               </div>
@@ -224,7 +236,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
 
                   <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
                     <a
-                      href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                      href={`tel:${business.phoneRaw}`}
                       className="px-6 py-2.5 rounded-xl bg-[#F5C400] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2"
                     >
                       <Phone className="w-4 h-4" />
@@ -385,6 +397,16 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                     />
                   </div>
 
+                  {submitError && (
+                    <div
+                      role="alert"
+                      className="flex items-start gap-2 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/40 text-xs text-red-300"
+                    >
+                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
                   {/* Submit Button */}
                   <button
                     id="contact-form-submit-btn"
@@ -406,7 +428,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
                   </button>
 
                   <p className="text-[11px] text-center text-neutral-500 font-mono">
-                    {format(t.contact.dispatchNote, { email: BUSINESS_INFO.email })}
+                    {format(t.contact.dispatchNote, { email: business.email })}
                   </p>
                 </form>
               )}

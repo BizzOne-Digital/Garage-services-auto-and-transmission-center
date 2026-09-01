@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { BUSINESS_INFO } from '../lib/constants';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useBusiness } from '../i18n/useContent';
 
 interface HeroProps {
   onOpenQuoteModal: (serviceId?: string) => void;
@@ -13,6 +13,7 @@ const NAVBAR_CLEARANCE = 32;
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
   const { t } = useLanguage();
+  const business = useBusiness();
 
   // The navbar is fixed and its height changes with viewport width and language
   // (the logo/nav labels wrap), so reserve its measured height instead of a fixed padding.
@@ -61,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
           className="w-full h-full"
         >
           <img
-            src="https://images.unsplash.com/photo-1613214149922-f1809c99b414?q=80&w=2070&auto=format&fit=crop"
+            src={business.heroImageUrl}
             alt={t.hero.imageAlt}
             className="w-full h-full object-cover object-center opacity-20 filter grayscale contrast-125"
             loading="eager"
@@ -138,12 +139,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               {/* Direct Phone / Location Hub */}
               <div className="flex items-center gap-4">
                 <a
-                  href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                  href={`tel:${business.phoneRaw}`}
                   id="hero-secondary-call-btn"
                   className="flex flex-col justify-center text-left group"
                 >
                   <span className="text-[10px] uppercase tracking-widest text-neutral-500 font-mono">{t.hero.directWorkshop}</span>
-                  <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors">{BUSINESS_INFO.phone}</span>
+                  <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors">{business.phone}</span>
                 </a>
                 <div className="h-8 w-[1px] bg-white/10 hidden sm:block" />
                 <div className="flex flex-col text-left">
@@ -220,7 +221,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
                 </span>
               </div>
               <a
-                href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                href={`tel:${business.phoneRaw}`}
                 className="text-xs font-bold uppercase tracking-wider text-[#F5C400] hover:underline"
               >
                 {t.common.callAbdul} &rarr;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Phone } from 'lucide-react';
-import { BUSINESS_INFO } from '../lib/constants';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useBusiness } from '../i18n/useContent';
 
 interface AboutProps {
   onOpenQuoteModal: () => void;
@@ -10,6 +10,7 @@ interface AboutProps {
 
 export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
   const { t } = useLanguage();
+  const business = useBusiness();
   const highlights = t.about.highlights;
 
 
@@ -51,7 +52,7 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
             <div className="relative overflow-hidden border border-white/10 bg-[#141414] shadow-2xl group">
               <div className="aspect-[4/3] sm:aspect-[16/11] overflow-hidden">
                 <img
-                  src="https://www.garageuae.com/wp-content/uploads/2022/02/car-transmission-service.jpg"
+                  src={business.aboutImageUrl}
                   alt={t.about.imageAlt}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter grayscale brightness-90 contrast-125"
                   loading="lazy"
@@ -80,11 +81,11 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
                   </span>
                 </div>
                 <a
-                  href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                  href={`tel:${business.phoneRaw}`}
                   className="px-3 py-2 bg-[#F5C400] text-black font-bold text-xs uppercase tracking-tighter hover:bg-yellow-400 transition-colors"
                   aria-label={t.about.ariaCall}
                 >
-                  {BUSINESS_INFO.phone}
+                  {business.phone}
                 </a>
               </div>
             </div>
@@ -141,11 +142,11 @@ export const About: React.FC<AboutProps> = ({ onOpenQuoteModal }) => {
               </button>
 
               <a
-                href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                href={`tel:${business.phoneRaw}`}
                 className="px-6 py-3.5 bg-[#151515] hover:bg-[#1E1E1E] text-neutral-200 hover:text-white border border-white/10 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
               >
                 <Phone className="w-3.5 h-3.5 text-[#F5C400]" />
-                <span>{t.common.call} {BUSINESS_INFO.phone}</span>
+                <span>{t.common.call} {business.phone}</span>
               </a>
             </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { BUSINESS_INFO } from '../lib/constants';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useBusiness } from '../i18n/useContent';
 
 interface LogoProps {
   className?: string;
@@ -16,6 +16,7 @@ export const Logo: React.FC<LogoProps> = ({
   imageOnly = false,
 }) => {
   const { t } = useLanguage();
+  const business = useBusiness();
 
   const containerSizes = {
     sm: 'w-9 h-9',
@@ -36,7 +37,7 @@ export const Logo: React.FC<LogoProps> = ({
       <div className={`relative flex items-center justify-center ${className}`}>
         <div className={`relative ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F5C400] shadow-xl flex items-center justify-center p-0.5 group`}>
           <img
-            src={BUSINESS_INFO.logoUrl}
+            src={business.logoUrl}
             alt={t.logo.altEmblem}
             className="w-full h-full object-cover object-center rounded-full scale-[1.04]"
             referrerPolicy="no-referrer"
@@ -51,7 +52,7 @@ export const Logo: React.FC<LogoProps> = ({
       {/* Official Brand Emblem Image - Perfect Circle without corners */}
       <div className={`relative shrink-0 ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F5C400] shadow-md hover:scale-105 transition-transform duration-300 flex items-center justify-center p-0.5`}>
         <img
-          src={BUSINESS_INFO.logoUrl}
+          src={business.logoUrl}
           alt={t.logo.altEmblem}
           className="w-full h-full object-cover object-center rounded-full scale-[1.04]"
           referrerPolicy="no-referrer"

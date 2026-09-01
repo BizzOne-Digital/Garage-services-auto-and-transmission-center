@@ -17,6 +17,13 @@ export default defineConfig(() => {
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      // The admin portal and the public site talk to the Express API (npm run dev:api).
+      proxy: {
+        '/api': {
+          target: `http://localhost:${process.env.PORT || 4000}`,
+          changeOrigin: true,
+        },
+      },
     },
   };
 });

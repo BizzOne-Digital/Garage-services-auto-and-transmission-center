@@ -47,8 +47,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const t = DICTIONARIES[lang];
 
   // Keep the document language and SEO metadata in sync with the active language.
+  // The admin portal owns its own title and robots tag, so it is skipped here.
   useEffect(() => {
     document.documentElement.lang = t.meta.htmlLang;
+    if (window.location.pathname.startsWith('/admin')) return;
+
     document.title = t.meta.title;
 
     const setMeta = (selector: string, content: string) => {

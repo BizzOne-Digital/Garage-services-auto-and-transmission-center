@@ -1,7 +1,12 @@
 import { ServiceMeta } from '../types';
 
 /**
- * Language-independent business data. All user-facing copy lives in src/i18n.
+ * Language-independent business data.
+ *
+ * These are now *fallback* values: at runtime the site reads the same fields
+ * from MongoDB (managed in /admin/settings) and only falls back to this object
+ * while the content API is loading, unreachable or not yet seeded.
+ * All user-facing copy lives in src/i18n.
  */
 export const BUSINESS_INFO = {
   shortName: "Garage Services",
@@ -11,6 +16,10 @@ export const BUSINESS_INFO = {
   email: "Servicesauto786@gmail.com",
   socialMediaName: "garage services auto and transmission center",
   logoUrl: "https://res.cloudinary.com/dobtsjhb2/image/upload/v1787785423/image_cx6qfr.png",
+  heroImageUrl:
+    "https://images.unsplash.com/photo-1613214149922-f1809c99b414?q=80&w=2070&auto=format&fit=crop",
+  aboutImageUrl:
+    "https://www.garageuae.com/wp-content/uploads/2022/02/car-transmission-service.jpg",
 };
 
 /** Ordering, category and icon of each service. Copy lives in i18n (services.items). */

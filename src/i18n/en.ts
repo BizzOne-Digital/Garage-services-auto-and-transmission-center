@@ -450,6 +450,8 @@ export const en: Dictionary = {
       emailInvalid: 'Please enter a valid email address.',
       vehicle: 'Please specify your vehicle make & model.',
       vehicleShort: 'Vehicle make & model required.',
+      submitFailed:
+        'We could not send your request. Please try again or call Abdul directly.',
     },
   },
 

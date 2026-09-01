@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { BadgeDollarSign, Check, ArrowRight, HelpCircle } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useFaqs } from '../i18n/useContent';
 
 interface PricingProps {
   onOpenQuoteModal: (serviceId?: string) => void;
@@ -9,6 +10,7 @@ interface PricingProps {
 
 export const Pricing: React.FC<PricingProps> = ({ onOpenQuoteModal }) => {
   const { t } = useLanguage();
+  const faqs = useFaqs();
 
   return (
     <section id="pricing" className="py-20 sm:py-28 bg-[#0D0D0D] relative overflow-hidden">
@@ -134,7 +136,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenQuoteModal }) => {
           </div>
 
           <div className="space-y-4">
-            {t.pricing.faqs.map((faq, idx) => (
+            {faqs.map((faq, idx) => (
               <div key={idx} className="p-4 rounded-xl bg-[#1A1A1A] border border-neutral-800">
                 <h4 className="text-sm font-bold text-white mb-2">
                   {faq.q}
