@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { BUSINESS_INFO } from '../lib/constants';
@@ -8,13 +8,49 @@ interface HeroProps {
   onOpenQuoteModal: (serviceId?: string) => void;
 }
 
+/** Breathing room kept between the fixed navbar and the hero copy. */
+const NAVBAR_CLEARANCE = 32;
+
 export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
   const { t } = useLanguage();
+
+  // The navbar is fixed and its height changes with viewport width and language
+  // (the logo/nav labels wrap), so reserve its measured height instead of a fixed padding.
+  const [navbarHeight, setNavbarHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    const navbar = document.getElementById('main-navbar');
+    if (!navbar) return;
+
+    // The navbar also shrinks slightly once scrolled; only measure its resting
+    // height at the top of the page so the hero never shifts while scrolling.
+    const measure = () => {
+      if (window.scrollY > 30) return;
+      setNavbarHeight(navbar.getBoundingClientRect().height);
+    };
+
+    // Measure after layout so a language switch or late webfont is accounted for.
+    const frame = requestAnimationFrame(measure);
+    document.fonts?.ready.then(measure).catch(() => {});
+
+    const observer = new ResizeObserver(measure);
+    observer.observe(navbar);
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', measure);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+      window.removeEventListener('scroll', measure);
+    };
+  }, [t]);
 
   return (
     <section
       id="home"
       className="relative min-h-[92vh] sm:min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#0A0A0A]"
+      style={navbarHeight !== null ? { paddingTop: navbarHeight + NAVBAR_CLEARANCE } : undefined}
     >
       {/* Background with Cinematic Dark Gradient & Subtle Light Spotlights */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

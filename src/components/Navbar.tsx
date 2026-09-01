@@ -89,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
           </a>
 
           {/* Desktop Navigation Links - Sharp Artistic Tracking */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-semibold uppercase tracking-widest text-neutral-400" aria-label={t.nav.ariaMain}>
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 ml-6 xl:ml-10 text-xs font-semibold uppercase tracking-widest text-neutral-400" aria-label={t.nav.ariaMain}>
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -100,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
                     e.preventDefault();
                     handleNavClick(link.href);
                   }}
-                  className={`transition-colors py-1 ${
+                  className={`transition-colors py-1 whitespace-nowrap ${
                     isActive
                       ? 'text-white border-b-2 border-[#F5C400]'
                       : 'hover:text-[#F5C400]'
