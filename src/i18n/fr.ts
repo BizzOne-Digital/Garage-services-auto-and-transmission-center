@@ -8,6 +8,18 @@ export const fr = {
       "Garage Services Auto et Centre de Transmission offre des services de réparation automobile et de transmission fiables, à prix juste, à Montréal. Contactez Abdul au (514) 553-4206.",
   },
 
+  blog: {
+    eyebrow: 'Conseils et actualités',
+    title: 'Blogue',
+    subtitle:
+      "Conseils d'entretien, diagnostics de transmission et actualités de l'atelier, rédigés par notre équipe.",
+    meta: {
+      title: 'Blogue | Garage Services Auto et Centre de Transmission',
+      description:
+        "Conseils d'entretien automobile, diagnostics de transmission et actualités du Garage Services Auto et Centre de Transmission à Montréal.",
+    },
+  },
+
   language: {
     label: 'Langue',
     fr: 'FR',
@@ -502,6 +514,7 @@ export const fr = {
       pricing: 'Tarifs et FAQ',
       testimonials: 'Témoignages',
       contact: 'Contact et emplacement',
+      blog: 'Blogue',
     },
   },
 };

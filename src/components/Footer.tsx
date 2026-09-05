@@ -3,6 +3,8 @@ import { Phone, ArrowUpRight, ShieldCheck, ArrowUp } from 'lucide-react';
 import { Logo } from './Logo';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useBusiness, useServices } from '../i18n/useContent';
+import { navigate, usePathname } from '../lib/router';
+import { scrollToSection } from '../lib/scrollToSection';
 
 interface FooterProps {
   onOpenQuoteModal: (serviceId?: string) => void;
@@ -12,6 +14,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
   const { t, format } = useLanguage();
   const business = useBusiness();
   const services = useServices();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -83,13 +87,30 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
               {navLinks.map((link, i) => (
                 <li key={i}>
                   <a
-                    href={link.href}
+                    href={isHome ? link.href : `/${link.href}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.href);
+                    }}
                     className="text-neutral-400 hover:text-[#F5C400] transition-colors"
                   >
                     {link.name}
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/blog"
+                  onClick={(e) => {
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                    e.preventDefault();
+                    navigate('/blog');
+                  }}
+                  className="text-neutral-400 hover:text-[#F5C400] transition-colors"
+                >
+                  {t.footer.links.blog}
+                </a>
+              </li>
             </ul>
           </div>
 

@@ -9,6 +9,18 @@ export const en: Dictionary = {
       'Garage Services Auto and Transmission Center provides professional auto repair and transmission services with dependable workmanship and fair pricing in Montreal. Contact Abdul at (514) 553-4206.',
   },
 
+  blog: {
+    eyebrow: 'Advice & news',
+    title: 'Blog',
+    subtitle:
+      'Maintenance advice, transmission diagnostics and shop news, written by our team.',
+    meta: {
+      title: 'Blog | Garage Services Auto and Transmission Center',
+      description:
+        'Auto maintenance advice, transmission diagnostics and news from Garage Services Auto and Transmission Center in Montreal.',
+    },
+  },
+
   language: {
     label: 'Language',
     fr: 'FR',
@@ -500,6 +512,7 @@ export const en: Dictionary = {
       pricing: 'Pricing & FAQs',
       testimonials: 'Testimonials',
       contact: 'Contact & Location',
+      blog: 'Blog',
     },
   },
 };

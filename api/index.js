@@ -1029,6 +1029,15 @@ var en = {
     title: "Garage Services Auto and Transmission Center | Auto Repair & Transmission Specialist",
     description: "Garage Services Auto and Transmission Center provides professional auto repair and transmission services with dependable workmanship and fair pricing in Montreal. Contact Abdul at (514) 553-4206."
   },
+  blog: {
+    eyebrow: "Advice & news",
+    title: "Blog",
+    subtitle: "Maintenance advice, transmission diagnostics and shop news, written by our team.",
+    meta: {
+      title: "Blog | Garage Services Auto and Transmission Center",
+      description: "Auto maintenance advice, transmission diagnostics and news from Garage Services Auto and Transmission Center in Montreal."
+    }
+  },
   language: {
     label: "Language",
     fr: "FR",
@@ -1483,7 +1492,8 @@ var en = {
       services: "Services",
       pricing: "Pricing & FAQs",
       testimonials: "Testimonials",
-      contact: "Contact & Location"
+      contact: "Contact & Location",
+      blog: "Blog"
     }
   }
 };
@@ -1494,6 +1504,15 @@ var fr = {
     htmlLang: "fr",
     title: "Garage Services Auto et Centre de Transmission | R\xE9paration automobile et sp\xE9cialiste de la transmission",
     description: "Garage Services Auto et Centre de Transmission offre des services de r\xE9paration automobile et de transmission fiables, \xE0 prix juste, \xE0 Montr\xE9al. Contactez Abdul au (514) 553-4206."
+  },
+  blog: {
+    eyebrow: "Conseils et actualit\xE9s",
+    title: "Blogue",
+    subtitle: "Conseils d'entretien, diagnostics de transmission et actualit\xE9s de l'atelier, r\xE9dig\xE9s par notre \xE9quipe.",
+    meta: {
+      title: "Blogue | Garage Services Auto et Centre de Transmission",
+      description: "Conseils d'entretien automobile, diagnostics de transmission et actualit\xE9s du Garage Services Auto et Centre de Transmission \xE0 Montr\xE9al."
+    }
   },
   language: {
     label: "Langue",
@@ -1949,7 +1968,8 @@ var fr = {
       services: "Services",
       pricing: "Tarifs et FAQ",
       testimonials: "T\xE9moignages",
-      contact: "Contact et emplacement"
+      contact: "Contact et emplacement",
+      blog: "Blogue"
     }
   }
 };

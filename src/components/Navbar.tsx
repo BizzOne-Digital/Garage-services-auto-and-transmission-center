@@ -5,6 +5,8 @@ import { Logo } from './Logo';
 import { LanguageToggle } from './LanguageToggle';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useBusiness } from '../i18n/useContent';
+import { usePathname } from '../lib/router';
+import { scrollToSection } from '../lib/scrollToSection';
 
 interface NavbarProps {
   onOpenQuoteModal: (serviceId?: string) => void;
@@ -13,6 +15,8 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
   const { t, format } = useLanguage();
   const business = useBusiness();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -85,10 +89,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
 
   const handleNavClick = (href: string) => {
     setMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    // From a standalone route (e.g. /blog) this navigates home first.
+    scrollToSection(href);
   };
 
   const callLabel = `${t.common.call} ${business.phone}`;
@@ -107,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#home"
+            href={isHome ? '#home' : '/#home'}
             onClick={(e) => {
               e.preventDefault();
               handleNavClick('#home');
@@ -121,11 +123,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
           {/* Desktop Navigation Links - Sharp Artistic Tracking */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8 ml-6 xl:ml-10 text-xs font-semibold uppercase tracking-widest text-neutral-400" aria-label={t.nav.ariaMain}>
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
+              const isActive = isHome && activeSection === link.id;
               return (
                 <a
                   key={link.id}
-                  href={link.href}
+                  href={isHome ? link.href : `/${link.href}`}
                   onClick={(e) => {
                     e.preventDefault();
                     handleNavClick(link.href);
@@ -209,19 +211,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               {navLinks.map((link) => (
                 <a
                   key={link.id}
-                  href={link.href}
+                  href={isHome ? link.href : `/${link.href}`}
                   onClick={(e) => {
                     e.preventDefault();
                     handleNavClick(link.href);
                   }}
                   className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
-                    activeSection === link.id
+                    isHome && activeSection === link.id
                       ? 'bg-[#F5C400] text-[#0A0A0A] font-bold'
                       : 'text-neutral-200 hover:bg-neutral-800/80 hover:text-white'
                   }`}
                 >
                   <span>{link.name}</span>
-                  <ChevronRight className={`w-4 h-4 ${activeSection === link.id ? 'text-[#0A0A0A]' : 'text-neutral-500'}`} />
+                  <ChevronRight className={`w-4 h-4 ${isHome && activeSection === link.id ? 'text-[#0A0A0A]' : 'text-neutral-500'}`} />
                 </a>
               ))}
 

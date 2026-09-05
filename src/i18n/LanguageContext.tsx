@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { usePathname } from '../lib/router';
 import { fr, Dictionary } from './fr';
 import { en } from './en';
 
@@ -45,26 +46,59 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const t = DICTIONARIES[lang];
+  const pathname = usePathname();
 
-  // Keep the document language and SEO metadata in sync with the active language.
+  // Keep the document language and SEO metadata in sync with the active language
+  // and the current public route.
   // The admin portal owns its own title and robots tag, so it is skipped here.
   useEffect(() => {
     document.documentElement.lang = t.meta.htmlLang;
-    if (window.location.pathname.startsWith('/admin')) return;
+    if (pathname.startsWith('/admin')) return;
 
-    document.title = t.meta.title;
+    const isBlog = pathname === '/blog' || pathname.startsWith('/blog/');
+    const search = window.location.search;
+    // Soro renders a single article at /blog?post=… and writes that article's
+    // own title, description and structured data. Leave those alone.
+    const isBlogArticle = isBlog && new URLSearchParams(search).has('post');
 
     const setMeta = (selector: string, content: string) => {
       const el = document.head.querySelector<HTMLMetaElement>(selector);
       if (el) el.content = content;
     };
 
-    setMeta('meta[name="description"]', t.meta.description);
-    setMeta('meta[property="og:title"]', t.meta.title);
-    setMeta('meta[property="og:description"]', t.meta.description);
-    setMeta('meta[name="twitter:title"]', t.meta.title);
-    setMeta('meta[name="twitter:description"]', t.meta.description);
-  }, [t]);
+    setMeta('meta[property="og:locale"]', t.meta.htmlLang === 'fr' ? 'fr_CA' : 'en_CA');
+
+    if (!isBlogArticle) {
+      const title = isBlog ? t.blog.meta.title : t.meta.title;
+      const description = isBlog ? t.blog.meta.description : t.meta.description;
+
+      document.title = title;
+      setMeta('meta[name="description"]', description);
+      setMeta('meta[property="og:title"]', title);
+      setMeta('meta[property="og:description"]', description);
+      setMeta('meta[name="twitter:title"]', title);
+      setMeta('meta[name="twitter:description"]', description);
+    }
+
+    // Self-referential canonical + og:url, so /blog and each article are not
+    // treated as duplicates of the home page (or of each other).
+    const canonicalPath = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+    const canonicalUrl = `${window.location.origin}${canonicalPath}${isBlogArticle ? search : ''}`;
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = canonicalUrl;
+    let ogUrl = document.head.querySelector<HTMLMetaElement>('meta[property="og:url"]');
+    if (!ogUrl) {
+      ogUrl = document.createElement('meta');
+      ogUrl.setAttribute('property', 'og:url');
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.content = canonicalUrl;
+  }, [t, pathname]);
 
   const format = useCallback(
     (template: string, values: Record<string, string | number>) =>
