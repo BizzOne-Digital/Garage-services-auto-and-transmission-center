@@ -22,11 +22,13 @@ const pickList = (value: LocalizedList | undefined, lang: Language): string[] =>
 
 /** Images and business identity, with the bundled constants as the fallback. */
 export const useBusiness = (): SiteBusinessInfo => {
+  const { t, lang } = useLanguage();
   const { content } = useSiteContent();
   const settings = content?.settings ?? null;
 
   return useMemo(
     () => ({
+      businessName: pick(settings?.businessName, lang, t.common.businessName),
       shortName: settings?.shortName || BUSINESS_INFO.shortName,
       contactPerson: settings?.contactPerson || BUSINESS_INFO.contactPerson,
       phone: settings?.phone || BUSINESS_INFO.phone,
@@ -38,7 +40,7 @@ export const useBusiness = (): SiteBusinessInfo => {
       aboutImageUrl: settings?.aboutImageUrl || BUSINESS_INFO.aboutImageUrl,
       socialLinks: settings?.socialLinks ?? [],
     }),
-    [settings]
+    [settings, lang, t]
   );
 };
 

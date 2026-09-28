@@ -128,7 +128,7 @@ export const Contact: React.FC<ContactProps> = ({ initialServiceId }) => {
             {/* Primary Business Card */}
             <div className="rounded-2xl bg-gradient-to-b from-[#181818] to-[#121212] border border-neutral-700/80 p-6 sm:p-8 shadow-xl">
               <h3 className="text-lg font-bold text-white uppercase tracking-tight mb-1">
-                {t.common.businessName}
+                {business.businessName}
               </h3>
               <p className="text-xs font-mono text-[#F5C400] mb-6">
                 {format(t.contact.attn, { name: business.contactPerson })}

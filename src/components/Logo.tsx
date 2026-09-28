@@ -18,6 +18,15 @@ export const Logo: React.FC<LogoProps> = ({
   const { t } = useLanguage();
   const business = useBusiness();
 
+  // The lockup is two lines: the first two words of the business name (managed
+  // in /admin/settings), then the rest as the descriptor.
+  // ponytail: plain word split — give Settings a dedicated descriptor field if a
+  // name ever needs a different break.
+  const [brandFirst = '', brandSecond = '', ...descriptor] = business.businessName
+    .trim()
+    .split(/\s+/);
+  const descriptorLine = descriptor.join(' ') || t.logo.line2;
+
   const containerSizes = {
     sm: 'w-9 h-9',
     md: 'w-11 h-11',
@@ -62,10 +71,10 @@ export const Logo: React.FC<LogoProps> = ({
       {/* Brand Typography */}
       <div className="flex flex-col text-left">
         <span className={`${titleSizes[size]} text-white uppercase leading-none font-sans`}>
-          GARAGE <span className="text-[#F5C400]">SERVICES</span>
+          {brandFirst} <span className="text-[#F5C400]">{brandSecond}</span>
         </span>
         <span className="text-[8.5px] sm:text-[9.5px] tracking-[0.18em] text-[#F5C400] font-bold uppercase mt-1">
-          {t.logo.line2}
+          {descriptorLine}
         </span>
         {showTagline && (
           <span className="text-[9px] text-neutral-400 tracking-widest uppercase mt-0.5 font-mono">

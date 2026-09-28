@@ -61,6 +61,8 @@ export interface LeadFormData {
 
 /** Business identity resolved from the database, falling back to lib/constants.ts. */
 export interface SiteBusinessInfo {
+  /** Full business name for the active language. */
+  businessName: string;
   shortName: string;
   contactPerson: string;
   phone: string;

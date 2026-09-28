@@ -175,7 +175,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <p>{format(t.footer.rights, { name: t.common.businessName })}</p>
+          <p>{format(t.footer.rights, { name: business.businessName })}</p>
 
           <button
             onClick={scrollToTop}
