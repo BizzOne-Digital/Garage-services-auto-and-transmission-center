@@ -80,7 +80,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Main Hero Copy - Left Column (Col 7) */}
-          <div className="lg:col-span-7 flex flex-col text-left space-y-7">
+          <div className="lg:col-span-7 flex flex-col text-left space-y-7 rounded-2xl bg-gradient-to-b from-[#181818] to-[#121212] border border-neutral-700/80 p-6 sm:p-8 shadow-xl">
             
             {/* Artistic Eyebrow */}
             <motion.div
