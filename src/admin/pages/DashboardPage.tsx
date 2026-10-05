@@ -29,7 +29,7 @@ const StatCard: React.FC<{
     <div
       className={`h-full rounded-2xl border p-5 transition-colors ${
         accent
-          ? 'bg-gradient-to-b from-[#1E1B0A] to-[#121212] border-[#F5C400]/30'
+          ? 'bg-gradient-to-b from-[#1E1B0A] to-[#121212] border-[#F97316]/30'
           : 'bg-[#121212] border-neutral-800 hover:border-neutral-700'
       }`}
     >
@@ -37,7 +37,7 @@ const StatCard: React.FC<{
         <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-neutral-500">
           {label}
         </span>
-        <Icon className={`w-4 h-4 shrink-0 ${accent ? 'text-[#F5C400]' : 'text-neutral-600'}`} />
+        <Icon className={`w-4 h-4 shrink-0 ${accent ? 'text-[#F97316]' : 'text-neutral-600'}`} />
       </div>
       <p className="font-heading text-3xl font-black text-white mt-3 tabular-nums">{value}</p>
       {hint && <p className="text-[11px] text-neutral-500 mt-1">{hint}</p>}
@@ -153,7 +153,7 @@ export const DashboardPage: React.FC = () => {
               actions={
                 <Link
                   to="/admin/services"
-                  className="text-[11px] font-bold uppercase tracking-wider text-[#F5C400] hover:underline inline-flex items-center gap-1"
+                  className="text-[11px] font-bold uppercase tracking-wider text-[#F97316] hover:underline inline-flex items-center gap-1"
                 >
                   View all <ArrowUpRight className="w-3 h-3" />
                 </Link>
@@ -207,7 +207,7 @@ export const DashboardPage: React.FC = () => {
               actions={
                 <Link
                   to="/admin/leads"
-                  className="text-[11px] font-bold uppercase tracking-wider text-[#F5C400] hover:underline inline-flex items-center gap-1"
+                  className="text-[11px] font-bold uppercase tracking-wider text-[#F97316] hover:underline inline-flex items-center gap-1"
                 >
                   View all <ArrowUpRight className="w-3 h-3" />
                 </Link>

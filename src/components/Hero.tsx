@@ -72,7 +72,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
         {/* Multi-layered dark vignette overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-[#0A0A0A]/70" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent" />
-        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#F5C400]/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
+        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#F97316]/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
       </div>
 
@@ -87,9 +87,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-center gap-3 text-[#F5C400]"
+              className="flex items-center gap-3 text-[#F97316]"
             >
-              <div className="w-8 h-[1.5px] bg-[#F5C400]" />
+              <div className="w-8 h-[1.5px] bg-[#F97316]" />
               <span className="text-xs font-bold uppercase tracking-[0.3em]">
                 {t.hero.eyebrow}
               </span>
@@ -103,7 +103,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.92] tracking-tighter uppercase text-white"
             >
               {t.hero.headlineLine1} <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: '1.5px #F5C400' }}>
+              <span className="text-transparent" style={{ WebkitTextStroke: '1.5px #F97316' }}>
                 {t.hero.headlineAccent}
               </span> <br />
               {t.hero.headlineLine3}
@@ -114,7 +114,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-neutral-400 text-base sm:text-lg max-w-xl leading-relaxed border-l-2 border-[#F5C400] pl-5 sm:pl-6"
+              className="text-neutral-400 text-base sm:text-lg max-w-xl leading-relaxed border-l-2 border-[#F97316] pl-5 sm:pl-6"
             >
               {t.hero.subtext}
             </motion.p>
@@ -130,7 +130,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               <button
                 id="hero-primary-quote-btn"
                 onClick={() => onOpenQuoteModal()}
-                className="group flex items-center justify-center gap-4 bg-white text-black px-8 py-4 font-black uppercase tracking-tighter hover:bg-[#F5C400] transition-all active:scale-95"
+                className="group flex items-center justify-center gap-4 bg-white text-black px-8 py-4 font-black uppercase tracking-tighter hover:bg-[#F97316] transition-all active:scale-95"
               >
                 <span>{t.hero.primaryCta}</span>
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
@@ -144,7 +144,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
                   className="flex flex-col justify-center text-left group"
                 >
                   <span className="text-[10px] uppercase tracking-widest text-neutral-500 font-mono">{t.hero.directWorkshop}</span>
-                  <span className="text-sm font-bold text-white group-hover:text-[#F5C400] transition-colors">{business.phone}</span>
+                  <span className="text-sm font-bold text-white group-hover:text-[#F97316] transition-colors">{business.phone}</span>
                 </a>
                 <div className="h-8 w-[1px] bg-white/10 hidden sm:block" />
                 <div className="flex flex-col text-left">
@@ -162,17 +162,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
               className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-neutral-400 font-mono uppercase tracking-wider pt-4 border-t border-white/10"
             >
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-[#F5C400]" />
+                <span className="w-1.5 h-1.5 bg-[#F97316]" />
                 <span>{t.hero.trust1}</span>
               </div>
               <span className="text-neutral-700 hidden sm:inline">•</span>
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-[#F5C400]" />
+                <span className="w-1.5 h-1.5 bg-[#F97316]" />
                 <span>{t.hero.trust2}</span>
               </div>
               <span className="text-neutral-700 hidden sm:inline">•</span>
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-[#F5C400]" />
+                <span className="w-1.5 h-1.5 bg-[#F97316]" />
                 <span>{t.hero.trust3}</span>
               </div>
             </motion.div>
@@ -191,13 +191,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
                 <div
                   key={card.serviceId}
                   onClick={() => onOpenQuoteModal(card.serviceId)}
-                  className="group bg-[#151515] p-6 border-l-4 border-transparent hover:border-[#F5C400] transition-all cursor-pointer relative overflow-hidden border border-white/5 hover:border-white/10"
+                  className="group bg-[#151515] p-6 border-l-4 border-transparent hover:border-[#F97316] transition-all cursor-pointer relative overflow-hidden border border-white/5 hover:border-white/10"
                 >
-                  <div className="absolute -right-3 -bottom-3 text-6xl font-black text-white/5 group-hover:text-[#F5C400]/10 transition-colors pointer-events-none select-none">
+                  <div className="absolute -right-3 -bottom-3 text-6xl font-black text-white/5 group-hover:text-[#F97316]/10 transition-colors pointer-events-none select-none">
                     {`0${index + 1}`}
                   </div>
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-[#F5C400] font-black text-sm uppercase tracking-widest">
+                    <h3 className="text-[#F97316] font-black text-sm uppercase tracking-widest">
                       {card.title}
                     </h3>
                     <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 group-hover:text-white transition-colors">
@@ -215,14 +215,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
             {/* Direct Intake Banner */}
             <div className="bg-[#111111] p-4 border border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-[#F5C400] animate-pulse" />
+                <div className="w-2 h-2 bg-[#F97316] animate-pulse" />
                 <span className="text-xs font-mono uppercase text-neutral-300">
                   {t.hero.intakeBanner}
                 </span>
               </div>
               <a
                 href={`tel:${business.phoneRaw}`}
-                className="text-xs font-bold uppercase tracking-wider text-[#F5C400] hover:underline"
+                className="text-xs font-bold uppercase tracking-wider text-[#F97316] hover:underline"
               >
                 {t.common.callAbdul} &rarr;
               </a>

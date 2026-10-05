@@ -248,28 +248,28 @@ export const LeadsPage: React.FC = () => {
             <div className="grid gap-3 sm:grid-cols-2">
               <a
                 href={`tel:${openLead.phone.replace(/\D/g, '')}`}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0F0F0F] border border-neutral-800 hover:border-[#F5C400]/40 transition-colors group"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0F0F0F] border border-neutral-800 hover:border-[#F97316]/40 transition-colors group"
               >
-                <Phone className="w-4 h-4 text-[#F5C400] shrink-0" />
+                <Phone className="w-4 h-4 text-[#F97316] shrink-0" />
                 <span className="min-w-0">
                   <span className="block text-[10px] font-mono uppercase tracking-widest text-neutral-600">
                     Phone
                   </span>
-                  <span className="block text-xs font-bold text-white group-hover:text-[#F5C400] truncate">
+                  <span className="block text-xs font-bold text-white group-hover:text-[#F97316] truncate">
                     {openLead.phone}
                   </span>
                 </span>
               </a>
               <a
                 href={`mailto:${openLead.email}`}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0F0F0F] border border-neutral-800 hover:border-[#F5C400]/40 transition-colors group"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0F0F0F] border border-neutral-800 hover:border-[#F97316]/40 transition-colors group"
               >
-                <Mail className="w-4 h-4 text-[#F5C400] shrink-0" />
+                <Mail className="w-4 h-4 text-[#F97316] shrink-0" />
                 <span className="min-w-0">
                   <span className="block text-[10px] font-mono uppercase tracking-widest text-neutral-600">
                     Email
                   </span>
-                  <span className="block text-xs font-bold text-white group-hover:text-[#F5C400] truncate">
+                  <span className="block text-xs font-bold text-white group-hover:text-[#F97316] truncate">
                     {openLead.email}
                   </span>
                 </span>

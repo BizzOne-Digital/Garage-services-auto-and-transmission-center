@@ -4,8 +4,8 @@
   :root {
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --font-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-    --color-brand-yellow: #F5C400;
-    --color-brand-yellow-hover: #E5B700;
+    --color-brand-yellow: #F97316;
+    --color-brand-yellow-hover: #EA580C;
     --color-brand-black: #0A0A0A;
     --color-brand-charcoal: #121212;
     --color-brand-dark: #151515;
@@ -27,7 +27,7 @@
 /* Artistic Flair Utilities */
 .text-stroke-yellow {
   color: transparent;
-  -webkit-text-stroke: 1px #F5C400;
+  -webkit-text-stroke: 1px #F97316;
 }
 
 .text-stroke-white {
@@ -37,7 +37,7 @@
 
 .text-stroke-yellow-bold {
   color: transparent;
-  -webkit-text-stroke: 1.5px #F5C400;
+  -webkit-text-stroke: 1.5px #F97316;
 }
 
 .bg-grid-pattern {
@@ -49,23 +49,23 @@
 
 .bg-dot-pattern {
   background-size: 24px 24px;
-  background-image: radial-gradient(rgba(245, 196, 0, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(249, 115, 22, 0.12) 1px, transparent 1px);
 }
 
 .glow-yellow-sm {
-  box-shadow: 0 0 20px -5px rgba(245, 196, 0, 0.35);
+  box-shadow: 0 0 20px -5px rgba(249, 115, 22, 0.35);
 }
 
 .glow-yellow-md {
-  box-shadow: 0 0 35px -5px rgba(245, 196, 0, 0.45);
+  box-shadow: 0 0 35px -5px rgba(249, 115, 22, 0.45);
 }
 
 .glow-yellow-lg {
-  box-shadow: 0 0 50px -10px rgba(245, 196, 0, 0.55);
+  box-shadow: 0 0 50px -10px rgba(249, 115, 22, 0.55);
 }
 
 .metallic-divider {
-  background: linear-gradient(90deg, transparent, rgba(245, 196, 0, 0.5), rgba(255, 255, 255, 0.8), rgba(245, 196, 0, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.5), rgba(255, 255, 255, 0.8), rgba(249, 115, 22, 0.5), transparent);
 }
 
 /* Custom Scrollbar */
@@ -79,5 +79,5 @@
   background: #222222;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #F5C400;
+  background: #F97316;
 }

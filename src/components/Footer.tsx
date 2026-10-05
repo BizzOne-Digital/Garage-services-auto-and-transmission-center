@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
       <div className="border-b border-white/10 bg-[#111111]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#F5C400] font-bold block mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#F97316] font-bold block mb-1">
               {t.footer.bannerEyebrow}
             </span>
             <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tighter">
@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
             <button
               onClick={() => onOpenQuoteModal()}
-              className="w-full sm:w-auto px-7 py-3.5 bg-white text-black hover:bg-[#F5C400] font-black text-xs uppercase tracking-tighter flex items-center justify-center gap-2 transition-all active:scale-95"
+              className="w-full sm:w-auto px-7 py-3.5 bg-white text-black hover:bg-[#F97316] font-black text-xs uppercase tracking-tighter flex items-center justify-center gap-2 transition-all active:scale-95"
             >
               <span>{t.common.getFreeQuote}</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
               href={`tel:${business.phoneRaw}`}
               className="w-full sm:w-auto px-6 py-3.5 bg-[#181818] hover:bg-[#222222] text-white border border-white/10 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
             >
-              <Phone className="w-3.5 h-3.5 text-[#F5C400]" />
+              <Phone className="w-3.5 h-3.5 text-[#F97316]" />
               <span>{t.common.call} {business.phone}</span>
             </a>
           </div>
@@ -73,7 +73,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
               {t.footer.bio}
             </p>
             <div className="flex items-center gap-2 text-xs font-mono text-neutral-400 bg-[#121212] p-2.5 rounded-lg border border-neutral-800">
-              <ShieldCheck className="w-4 h-4 text-[#F5C400] shrink-0" />
+              <ShieldCheck className="w-4 h-4 text-[#F97316] shrink-0" />
               <span>{t.footer.badge}</span>
             </div>
           </div>
@@ -92,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-neutral-400 hover:text-[#F5C400] transition-colors"
+                    className="text-neutral-400 hover:text-[#F97316] transition-colors"
                   >
                     {link.name}
                   </a>
@@ -106,7 +106,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
                     e.preventDefault();
                     navigate('/blog');
                   }}
-                  className="text-neutral-400 hover:text-[#F5C400] transition-colors"
+                  className="text-neutral-400 hover:text-[#F97316] transition-colors"
                 >
                   {t.footer.links.blog}
                 </a>
@@ -124,7 +124,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
                 <li key={s.id}>
                   <button
                     onClick={() => onOpenQuoteModal(s.id)}
-                    className="text-neutral-400 hover:text-[#F5C400] transition-colors text-left"
+                    className="text-neutral-400 hover:text-[#F97316] transition-colors text-left"
                   >
                     {s.title}
                   </button>
@@ -148,7 +148,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
                 <span className="text-[10px] uppercase font-mono text-neutral-500 block">{t.footer.phone}</span>
                 <a
                   href={`tel:${business.phoneRaw}`}
-                  className="font-bold text-[#F5C400] hover:underline"
+                  className="font-bold text-[#F97316] hover:underline"
                 >
                   {business.phone}
                 </a>
@@ -179,7 +179,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenQuoteModal }) => {
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-neutral-400 hover:text-[#F5C400] transition-colors font-mono uppercase text-[11px]"
+            className="flex items-center gap-1.5 text-neutral-400 hover:text-[#F97316] transition-colors font-mono uppercase text-[11px]"
           >
             <span>{t.footer.backToTop}</span>
             <ArrowUp className="w-3.5 h-3.5" />

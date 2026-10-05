@@ -5,7 +5,7 @@ import { AlertTriangle, Inbox, Loader2, X } from 'lucide-react';
  * Admin UI primitives.
  *
  * The palette, typography and shape language are lifted straight from the
- * public site: #0A0A0A ground, #121212/#161616 panels, #F5C400 accent,
+ * public site: #0A0A0A ground, #121212/#161616 panels, #F97316 accent,
  * Space Grotesk uppercase headings and rounded-xl/2xl surfaces.
  */
 
@@ -15,10 +15,10 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
 const BUTTON_STYLES: Record<ButtonVariant, string> = {
   primary:
-    'bg-[#F5C400] text-[#0A0A0A] hover:bg-[#E5B700] shadow-lg hover:shadow-[#F5C400]/25 border border-transparent',
+    'bg-[#F97316] text-[#0A0A0A] hover:bg-[#EA580C] shadow-lg hover:shadow-[#F97316]/25 border border-transparent',
   secondary:
     'bg-[#1A1A1A] text-neutral-200 hover:text-white hover:border-neutral-600 border border-neutral-700',
-  ghost: 'bg-transparent text-neutral-400 hover:text-[#F5C400] border border-transparent',
+  ghost: 'bg-transparent text-neutral-400 hover:text-[#F97316] border border-transparent',
   danger: 'bg-red-500/10 text-red-300 hover:bg-red-500/20 border border-red-500/40',
 };
 
@@ -95,7 +95,7 @@ export const Label: React.FC<{ htmlFor?: string; children: React.ReactNode; hint
 );
 
 const FIELD_BASE =
-  'w-full px-3.5 py-2.5 rounded-xl bg-[#0F0F0F] border text-sm text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-[#F5C400]/70 transition-colors';
+  'w-full px-3.5 py-2.5 rounded-xl bg-[#0F0F0F] border text-sm text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-[#F97316]/70 transition-colors';
 
 export const Input: React.FC<
   React.InputHTMLAttributes<HTMLInputElement> & { error?: string }
@@ -148,7 +148,7 @@ export const Toggle: React.FC<{
   >
     <span
       className={`mt-0.5 relative w-10 h-5 shrink-0 rounded-full transition-colors ${
-        checked ? 'bg-[#F5C400]' : 'bg-neutral-700'
+        checked ? 'bg-[#F97316]' : 'bg-neutral-700'
       }`}
     >
       <span
@@ -171,7 +171,7 @@ export const Badge: React.FC<{
   children: React.ReactNode;
 }> = ({ tone = 'neutral', children }) => {
   const tones: Record<string, string> = {
-    yellow: 'bg-[#F5C400]/10 text-[#F5C400] border-[#F5C400]/30',
+    yellow: 'bg-[#F97316]/10 text-[#F97316] border-[#F97316]/30',
     green: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30',
     neutral: 'bg-neutral-800 text-neutral-400 border-neutral-700',
     red: 'bg-red-500/10 text-red-300 border-red-500/30',
@@ -190,7 +190,7 @@ export const Badge: React.FC<{
 
 export const Spinner: React.FC<{ label?: string }> = ({ label }) => (
   <div className="flex items-center justify-center gap-3 py-16 text-neutral-500">
-    <Loader2 className="w-5 h-5 animate-spin text-[#F5C400]" />
+    <Loader2 className="w-5 h-5 animate-spin text-[#F97316]" />
     {label && <span className="text-xs uppercase tracking-wider">{label}</span>}
   </div>
 );

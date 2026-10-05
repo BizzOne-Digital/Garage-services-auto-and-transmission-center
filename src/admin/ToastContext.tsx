@@ -24,7 +24,7 @@ const ToastContext = createContext<ToastValue>({
 const TONE_STYLES: Record<ToastTone, string> = {
   success: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-200',
   error: 'border-red-500/40 bg-red-500/10 text-red-200',
-  info: 'border-[#F5C400]/40 bg-[#F5C400]/10 text-[#F5C400]',
+  info: 'border-[#F97316]/40 bg-[#F97316]/10 text-[#F97316]',
 };
 
 const TONE_ICON: Record<ToastTone, React.ElementType> = {

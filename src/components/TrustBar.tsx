@@ -11,15 +11,15 @@ export const TrustBar: React.FC = () => {
   const getIcon = (name: string) => {
     switch (name) {
       case 'ShieldCheck':
-        return <ShieldCheck className="w-5 h-5 text-[#F5C400]" />;
+        return <ShieldCheck className="w-5 h-5 text-[#F97316]" />;
       case 'BadgeDollarSign':
-        return <BadgeDollarSign className="w-5 h-5 text-[#F5C400]" />;
+        return <BadgeDollarSign className="w-5 h-5 text-[#F97316]" />;
       case 'Cog':
-        return <Cog className="w-5 h-5 text-[#F5C400]" />;
+        return <Cog className="w-5 h-5 text-[#F97316]" />;
       case 'HeartHandshake':
-        return <HeartHandshake className="w-5 h-5 text-[#F5C400]" />;
+        return <HeartHandshake className="w-5 h-5 text-[#F97316]" />;
       default:
-        return <ShieldCheck className="w-5 h-5 text-[#F5C400]" />;
+        return <ShieldCheck className="w-5 h-5 text-[#F97316]" />;
     }
   };
 
@@ -40,13 +40,13 @@ export const TrustBar: React.FC = () => {
                 <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-500 font-mono font-bold">
                   0{index + 1} // {t.trustBar.pillarLabel}
                 </span>
-                <div className="w-8 h-8 rounded-sm bg-[#1A1A1A] border border-white/10 flex items-center justify-center group-hover:border-[#F5C400]/40 transition-colors">
+                <div className="w-8 h-8 rounded-sm bg-[#1A1A1A] border border-white/10 flex items-center justify-center group-hover:border-[#F97316]/40 transition-colors">
                   {getIcon(pillar.iconName)}
                 </div>
               </div>
 
               <div>
-                <span className="text-xs font-mono font-bold text-[#F5C400] uppercase tracking-wider block mb-0.5">
+                <span className="text-xs font-mono font-bold text-[#F97316] uppercase tracking-wider block mb-0.5">
                   {pillar.subtitle}
                 </span>
                 <h3 className="text-lg font-black text-white uppercase tracking-tighter mb-2">
@@ -58,7 +58,7 @@ export const TrustBar: React.FC = () => {
               </div>
 
               {/* Bottom line accent on hover */}
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#F5C400] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#F97316] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
             </motion.div>
           ))}
         </div>

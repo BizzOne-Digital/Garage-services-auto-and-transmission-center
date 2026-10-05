@@ -53,15 +53,15 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="space-y-2">
-            <div className="flex items-center gap-3 text-[#F5C400]">
-              <div className="w-8 h-[1.5px] bg-[#F5C400]" />
+            <div className="flex items-center gap-3 text-[#F97316]">
+              <div className="w-8 h-[1.5px] bg-[#F97316]" />
               <span className="text-xs font-bold uppercase tracking-[0.3em]">
                 {t.services.eyebrow}
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-[0.95]">
               {t.services.headlineLine1} <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: '1.2px #F5C400' }}>
+              <span className="text-transparent" style={{ WebkitTextStroke: '1.2px #F97316' }}>
                 {t.services.headlineAccent}
               </span>
             </h2>
@@ -81,7 +81,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                 onClick={() => setActiveCategory(tab.id)}
                 className={`px-4 py-2 text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 ${
                   activeCategory === tab.id
-                    ? 'bg-[#F5C400] text-black font-black'
+                    ? 'bg-[#F97316] text-black font-black'
                     : 'text-neutral-400 hover:text-white hover:bg-white/5'
                 }`}
               >
@@ -104,28 +104,28 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.07 }}
-                className="group relative bg-[#151515] border border-white/5 hover:border-white/20 border-l-4 border-l-transparent hover:border-l-[#F5C400] p-6 sm:p-7 flex flex-col justify-between shadow-2xl transition-all duration-300 overflow-hidden"
+                className="group relative bg-[#151515] border border-white/5 hover:border-white/20 border-l-4 border-l-transparent hover:border-l-[#F97316] p-6 sm:p-7 flex flex-col justify-between shadow-2xl transition-all duration-300 overflow-hidden"
               >
                 {/* Background Watermark Index */}
-                <div className="absolute -right-3 -bottom-4 text-7xl font-black text-white/5 group-hover:text-[#F5C400]/10 transition-colors pointer-events-none select-none font-mono">
+                <div className="absolute -right-3 -bottom-4 text-7xl font-black text-white/5 group-hover:text-[#F97316]/10 transition-colors pointer-events-none select-none font-mono">
                   {cardNum}
                 </div>
 
                 <div>
                   {/* Top Header of Card: Icon + Category Badge */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-10 h-10 bg-[#1A1A1A] border border-white/10 flex items-center justify-center text-[#F5C400] group-hover:bg-[#F5C400] group-hover:text-black transition-all duration-300">
+                    <div className="w-10 h-10 bg-[#1A1A1A] border border-white/10 flex items-center justify-center text-[#F97316] group-hover:bg-[#F97316] group-hover:text-black transition-all duration-300">
                       {getServiceIcon(service.iconName, "w-5 h-5")}
                     </div>
                     {isTransmissionSpecialty && (
-                      <span className="text-[9px] font-mono uppercase tracking-[0.2em] font-bold px-2 py-0.5 bg-[#201B0B] text-[#F5C400] border border-[#F5C400]/40">
+                      <span className="text-[9px] font-mono uppercase tracking-[0.2em] font-bold px-2 py-0.5 bg-[#201B0B] text-[#F97316] border border-[#F97316]/40">
                         {t.services.specialtyBadge}
                       </span>
                     )}
                   </div>
 
                   {/* Service Title */}
-                  <h3 className="text-lg font-black text-white uppercase tracking-tight mb-2 group-hover:text-[#F5C400] transition-colors">
+                  <h3 className="text-lg font-black text-white uppercase tracking-tight mb-2 group-hover:text-[#F97316] transition-colors">
                     {service.title}
                   </h3>
 
@@ -138,7 +138,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                   <ul className="space-y-2 mb-6 pt-4 border-t border-white/10">
                     {service.features.slice(0, 3).map((feat, i) => (
                       <li key={i} className="flex items-start gap-2 text-xs text-neutral-300 font-mono">
-                        <span className="text-[#F5C400] font-bold">&gt;</span>
+                        <span className="text-[#F97316] font-bold">&gt;</span>
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -156,7 +156,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
 
                   <button
                     onClick={() => onOpenQuoteModal(service.id)}
-                    className="px-3.5 py-1.5 bg-[#202020] group-hover:bg-[#F5C400] text-neutral-200 group-hover:text-black font-black text-xs uppercase tracking-tighter border border-white/10 group-hover:border-[#F5C400] transition-all flex items-center gap-1.5"
+                    className="px-3.5 py-1.5 bg-[#202020] group-hover:bg-[#F97316] text-neutral-200 group-hover:text-black font-black text-xs uppercase tracking-tighter border border-white/10 group-hover:border-[#F97316] transition-all flex items-center gap-1.5"
                     aria-label={format(t.services.ariaQuoteFor, { service: service.title })}
                   >
                     <span>{t.services.getQuote}</span>
@@ -191,11 +191,11 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
 
               {/* Modal Header */}
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-[#F5C400]/10 text-[#F5C400] border border-[#F5C400]/20">
+                <div className="p-3 rounded-xl bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/20">
                   {getServiceIcon(selectedService.iconName, "w-6 h-6")}
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono font-bold text-[#F5C400] uppercase tracking-wider">{t.services.modal.overview}</span>
+                  <span className="text-[11px] font-mono font-bold text-[#F97316] uppercase tracking-wider">{t.services.modal.overview}</span>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-white uppercase tracking-tight">
                     {selectedService.title}
                   </h3>
@@ -215,7 +215,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {selectedService.features.map((feat, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-neutral-200 bg-[#1A1A1A] p-2.5 rounded-lg border border-neutral-800">
-                      <Check className="w-4 h-4 text-[#F5C400] shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-[#F97316] shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -224,14 +224,14 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
 
               {/* Common Symptoms (if applicable) */}
               {selectedService.commonSymptoms && (
-                <div className="mb-6 p-4 rounded-xl bg-[#1D190B] border border-[#F5C400]/30">
-                  <div className="flex items-center gap-2 mb-2 text-[#F5C400]">
+                <div className="mb-6 p-4 rounded-xl bg-[#1D190B] border border-[#F97316]/30">
+                  <div className="flex items-center gap-2 mb-2 text-[#F97316]">
                     <ShieldAlert className="w-4 h-4" />
                     <span className="text-xs font-bold uppercase tracking-wider">{t.services.modal.symptomsTitle}</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {selectedService.commonSymptoms.map((sym, idx) => (
-                      <span key={idx} className="text-xs bg-[#2B230A] text-neutral-200 px-2.5 py-1 rounded-md border border-[#F5C400]/20">
+                      <span key={idx} className="text-xs bg-[#2B230A] text-neutral-200 px-2.5 py-1 rounded-md border border-[#F97316]/20">
                         • {sym}
                       </span>
                     ))}
@@ -259,7 +259,7 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuoteModal }) => {
                     setSelectedServiceId(null);
                     onOpenQuoteModal(sid);
                   }}
-                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#F5C400] hover:bg-[#E5B700] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-colors"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#F97316] hover:bg-[#EA580C] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-colors"
                 >
                   <span>{t.services.modal.cta}</span>
                   <ArrowRight className="w-4 h-4" />

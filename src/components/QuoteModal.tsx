@@ -97,12 +97,12 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
             className="relative w-full max-w-xl bg-[#141414] border border-neutral-700/90 rounded-2xl p-6 sm:p-8 shadow-2xl my-8 overflow-hidden"
           >
             {/* Top Accent line */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#F5C400] to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#F97316] to-transparent" />
 
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 rounded-lg bg-[#1F1F1F] text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors focus:outline-none focus:ring-2 focus:ring-[#F5C400]"
+              className="absolute top-4 right-4 p-2 rounded-lg bg-[#1F1F1F] text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors focus:outline-none focus:ring-2 focus:ring-[#F97316]"
               aria-label={t.quoteModal.ariaClose}
             >
               <X className="w-5 h-5" />
@@ -110,7 +110,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
 
             {submitted ? (
               <div className="text-center py-6">
-                <div className="w-14 h-14 rounded-full bg-[#F5C400]/20 text-[#F5C400] flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 rounded-full bg-[#F97316]/20 text-[#F97316] flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="w-8 h-8" />
                 </div>
                 <h3 className="text-xl font-bold text-white uppercase tracking-tight mb-2">
@@ -126,7 +126,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a
                     href={`tel:${business.phoneRaw}`}
-                    className="px-5 py-2.5 rounded-xl bg-[#F5C400] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2"
+                    className="px-5 py-2.5 rounded-xl bg-[#F97316] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2"
                   >
                     <Phone className="w-4 h-4" />
                     <span>{t.common.callAbdul}</span>
@@ -142,7 +142,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
             ) : (
               <div>
                 <div className="mb-6">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#F5C400] block mb-1">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#F97316] block mb-1">
                     {t.quoteModal.eyebrow}
                   </span>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-white uppercase tracking-tight">
@@ -164,7 +164,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                         placeholder={t.contact.fields.namePlaceholder}
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] ${
+                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F97316] ${
                           errors.fullName ? 'border-red-500' : 'border-neutral-700'
                         }`}
                       />
@@ -178,7 +178,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                         placeholder={t.contact.fields.phonePlaceholder}
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] ${
+                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F97316] ${
                           errors.phone ? 'border-red-500' : 'border-neutral-700'
                         }`}
                       />
@@ -195,7 +195,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                         placeholder={t.contact.fields.emailShortPlaceholder}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] ${
+                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F97316] ${
                           errors.email ? 'border-red-500' : 'border-neutral-700'
                         }`}
                       />
@@ -209,7 +209,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                         placeholder={t.contact.fields.vehicleShortPlaceholder}
                         value={formData.vehicleMakeModel}
                         onChange={(e) => setFormData({ ...formData, vehicleMakeModel: e.target.value })}
-                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400] ${
+                        className={`w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F97316] ${
                           errors.vehicleMakeModel ? 'border-red-500' : 'border-neutral-700'
                         }`}
                       />
@@ -224,7 +224,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                       <select
                         value={formData.serviceNeeded}
                         onChange={(e) => setFormData({ ...formData, serviceNeeded: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border border-neutral-700 text-xs text-white focus:outline-none focus:ring-2 focus:ring-[#F5C400]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border border-neutral-700 text-xs text-white focus:outline-none focus:ring-2 focus:ring-[#F97316]"
                       >
                         {services.map(s => (
                           <option key={s.id} value={s.id} className="bg-[#181818]">
@@ -240,7 +240,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                       <select
                         value={formData.transmissionType}
                         onChange={(e) => setFormData({ ...formData, transmissionType: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border border-neutral-700 text-xs text-white focus:outline-none focus:ring-2 focus:ring-[#F5C400]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border border-neutral-700 text-xs text-white focus:outline-none focus:ring-2 focus:ring-[#F97316]"
                       >
                         <option value="automatic">{t.contact.transmissionOptions.automatic}</option>
                         <option value="manual">{t.contact.transmissionOptions.manual}</option>
@@ -260,7 +260,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                       placeholder={t.contact.fields.messageShortPlaceholder}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border border-neutral-700 text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F5C400]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#1A1A1A] border border-neutral-700 text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#F97316]"
                     />
                   </div>
 
@@ -276,7 +276,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, initial
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3.5 rounded-xl bg-[#F5C400] hover:bg-[#E5B700] disabled:opacity-50 text-[#0A0A0A] font-bold text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all mt-2 active:scale-98"
+                    className="w-full py-3.5 rounded-xl bg-[#F97316] hover:bg-[#EA580C] disabled:opacity-50 text-[#0A0A0A] font-bold text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all mt-2 active:scale-98"
                   >
                     {loading ? (
                       <span className="flex items-center gap-2">

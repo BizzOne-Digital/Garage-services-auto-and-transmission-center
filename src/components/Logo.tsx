@@ -44,7 +44,7 @@ export const Logo: React.FC<LogoProps> = ({
   if (imageOnly) {
     return (
       <div className={`relative flex items-center justify-center ${className}`}>
-        <div className={`relative ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F5C400] shadow-xl flex items-center justify-center p-0.5 group`}>
+        <div className={`relative ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F97316] shadow-xl flex items-center justify-center p-0.5 group`}>
           <img
             src={business.logoUrl}
             alt={t.logo.altEmblem}
@@ -59,7 +59,7 @@ export const Logo: React.FC<LogoProps> = ({
   return (
     <div className={`flex items-center gap-3 sm:gap-3.5 select-none ${className}`}>
       {/* Official Brand Emblem Image - Perfect Circle without corners */}
-      <div className={`relative shrink-0 ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F5C400] shadow-md hover:scale-105 transition-transform duration-300 flex items-center justify-center p-0.5`}>
+      <div className={`relative shrink-0 ${containerSizes[size]} aspect-square rounded-full overflow-hidden bg-white border-2 border-[#F97316] shadow-md hover:scale-105 transition-transform duration-300 flex items-center justify-center p-0.5`}>
         <img
           src={business.logoUrl}
           alt={t.logo.altEmblem}
@@ -71,9 +71,9 @@ export const Logo: React.FC<LogoProps> = ({
       {/* Brand Typography */}
       <div className="flex flex-col text-left">
         <span className={`${titleSizes[size]} text-white uppercase leading-none font-sans`}>
-          {brandFirst} <span className="text-[#F5C400]">{brandSecond}</span>
+          {brandFirst} <span className="text-[#F97316]">{brandSecond}</span>
         </span>
-        <span className="text-[8.5px] sm:text-[9.5px] tracking-[0.18em] text-[#F5C400] font-bold uppercase mt-1">
+        <span className="text-[8.5px] sm:text-[9.5px] tracking-[0.18em] text-[#F97316] font-bold uppercase mt-1">
           {descriptorLine}
         </span>
         {showTagline && (

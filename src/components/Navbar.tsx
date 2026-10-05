@@ -114,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
               e.preventDefault();
               handleNavClick('#home');
             }}
-            className="group focus:outline-none focus:ring-1 focus:ring-[#F5C400] p-1"
+            className="group focus:outline-none focus:ring-1 focus:ring-[#F97316] p-1"
             aria-label={t.nav.ariaLogo}
           >
             <Logo size="md" />
@@ -134,8 +134,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
                   }}
                   className={`transition-colors py-1 whitespace-nowrap ${
                     isActive
-                      ? 'text-white border-b-2 border-[#F5C400]'
-                      : 'hover:text-[#F5C400]'
+                      ? 'text-white border-b-2 border-[#F97316]'
+                      : 'hover:text-[#F97316]'
                   }`}
                 >
                   {link.name}
@@ -153,7 +153,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             <a
               href={`tel:${business.phoneRaw}`}
               id="navbar-phone-btn"
-              className="p-2.5 bg-[#151515] hover:bg-[#F5C400] text-[#F5C400] hover:text-[#0A0A0A] border border-white/10 hover:border-[#F5C400] transition-all flex items-center justify-center shadow-md active:scale-95 group"
+              className="p-2.5 bg-[#151515] hover:bg-[#F97316] text-[#F97316] hover:text-[#0A0A0A] border border-white/10 hover:border-[#F97316] transition-all flex items-center justify-center shadow-md active:scale-95 group"
               title={callLabel}
               aria-label={callLabel}
             >
@@ -164,7 +164,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             <button
               id="navbar-quote-btn"
               onClick={() => onOpenQuoteModal()}
-              className="bg-[#F5C400] text-[#0A0A0A] px-5 py-2.5 text-xs font-black uppercase tracking-tighter hover:bg-yellow-400 transition-all transform hover:-translate-y-0.5 shadow-md active:scale-95"
+              className="bg-[#F97316] text-[#0A0A0A] px-5 py-2.5 text-xs font-black uppercase tracking-tighter hover:bg-orange-400 transition-all transform hover:-translate-y-0.5 shadow-md active:scale-95"
             >
               <span>{t.common.getQuote}</span>
             </button>
@@ -175,7 +175,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
             <a
               href={`tel:${business.phoneRaw}`}
               id="mobile-header-call-btn"
-              className="p-2 rounded-sm bg-[#F5C400] text-[#0A0A0A] font-bold flex items-center justify-center shadow-md active:scale-95 transition-transform"
+              className="p-2 rounded-sm bg-[#F97316] text-[#0A0A0A] font-bold flex items-center justify-center shadow-md active:scale-95 transition-transform"
               aria-label={callLabel}
               title={callLabel}
             >
@@ -218,7 +218,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
                   }}
                   className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
                     isHome && activeSection === link.id
-                      ? 'bg-[#F5C400] text-[#0A0A0A] font-bold'
+                      ? 'bg-[#F97316] text-[#0A0A0A] font-bold'
                       : 'text-neutral-200 hover:bg-neutral-800/80 hover:text-white'
                   }`}
                 >
@@ -237,9 +237,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
 
                 <a
                   href={`tel:${business.phoneRaw}`}
-                  className="flex items-center justify-center gap-2.5 w-full py-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white font-bold text-sm hover:border-[#F5C400] transition-colors"
+                  className="flex items-center justify-center gap-2.5 w-full py-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white font-bold text-sm hover:border-[#F97316] transition-colors"
                 >
-                  <Phone className="w-4 h-4 text-[#F5C400]" />
+                  <Phone className="w-4 h-4 text-[#F97316]" />
                   <span>{format(t.nav.callAbdulWithPhone, { phone: business.phone })}</span>
                 </a>
 
@@ -248,7 +248,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
                     setMobileMenuOpen(false);
                     onOpenQuoteModal();
                   }}
-                  className="w-full py-3 rounded-lg bg-[#F5C400] text-[#0A0A0A] font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-all"
+                  className="w-full py-3 rounded-lg bg-[#F97316] text-[#0A0A0A] font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-all"
                 >
                   <span>{t.common.getFreeQuote}</span>
                   <ArrowUpRight className="w-4 h-4" />

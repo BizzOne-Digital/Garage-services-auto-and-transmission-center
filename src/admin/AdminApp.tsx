@@ -16,7 +16,7 @@ import { TrustPillarsPage } from './pages/TrustPillarsPage';
 
 const FullScreenLoader: React.FC = () => (
   <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
-    <Loader2 className="w-6 h-6 animate-spin text-[#F5C400]" />
+    <Loader2 className="w-6 h-6 animate-spin text-[#F97316]" />
   </div>
 );
 

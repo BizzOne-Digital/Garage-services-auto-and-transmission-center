@@ -42,11 +42,11 @@ export const OfflineScreen: React.FC = () => {
       >
         <div className="flex justify-center">
           <div className="w-16 h-16 rounded-full border border-neutral-800 bg-neutral-900/60 flex items-center justify-center">
-            <WifiOff className="w-7 h-7 text-[#F5C400]" aria-hidden="true" />
+            <WifiOff className="w-7 h-7 text-[#F97316]" aria-hidden="true" />
           </div>
         </div>
 
-        <p className="text-[11px] font-mono tracking-widest text-[#F5C400] uppercase mt-6">
+        <p className="text-[11px] font-mono tracking-widest text-[#F97316] uppercase mt-6">
           {t.offline.badge}
         </p>
 
@@ -65,7 +65,7 @@ export const OfflineScreen: React.FC = () => {
           type="button"
           onClick={retry}
           disabled={checking}
-          className="inline-flex items-center justify-center gap-2 mt-8 px-6 py-3 rounded-full bg-[#F5C400] text-[#0A0A0A] text-sm font-semibold tracking-wide transition-colors hover:bg-[#ffd426] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F5C400] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] disabled:opacity-60 disabled:cursor-not-allowed"
+          className="inline-flex items-center justify-center gap-2 mt-8 px-6 py-3 rounded-full bg-[#F97316] text-[#0A0A0A] text-sm font-semibold tracking-wide transition-colors hover:bg-[#ffd426] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F97316] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {checking ? (
             <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
@@ -80,9 +80,9 @@ export const OfflineScreen: React.FC = () => {
           <p className="text-xs text-neutral-500">{t.offline.callPrompt}</p>
           <a
             href={`tel:+1${BUSINESS_INFO.phoneRaw}`}
-            className="inline-flex items-center gap-2 mt-2 text-base font-semibold text-[#F3F3F3] transition-colors hover:text-[#F5C400] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F5C400] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded"
+            className="inline-flex items-center gap-2 mt-2 text-base font-semibold text-[#F3F3F3] transition-colors hover:text-[#F97316] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F97316] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] rounded"
           >
-            <Phone className="w-4 h-4 text-[#F5C400]" aria-hidden="true" />
+            <Phone className="w-4 h-4 text-[#F97316]" aria-hidden="true" />
             {BUSINESS_INFO.phone}
           </a>
         </div>

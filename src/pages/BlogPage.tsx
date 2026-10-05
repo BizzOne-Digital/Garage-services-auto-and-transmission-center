@@ -13,8 +13,8 @@ export const BlogPage: React.FC = () => {
     <section id="blog" className="relative pt-28 sm:pt-36 pb-20 sm:pb-28 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Eyebrow */}
-        <div className="flex items-center gap-3 text-[#F5C400] mb-5">
-          <div className="w-8 h-[1.5px] bg-[#F5C400]" />
+        <div className="flex items-center gap-3 text-[#F97316] mb-5">
+          <div className="w-8 h-[1.5px] bg-[#F97316]" />
           <span className="text-xs font-bold uppercase tracking-[0.3em]">{t.blog.eyebrow}</span>
         </div>
 
@@ -22,7 +22,7 @@ export const BlogPage: React.FC = () => {
           {t.blog.title}
         </h1>
 
-        <p className="mt-6 text-neutral-400 text-base sm:text-lg max-w-2xl leading-relaxed border-l-2 border-[#F5C400] pl-5 sm:pl-6">
+        <p className="mt-6 text-neutral-400 text-base sm:text-lg max-w-2xl leading-relaxed border-l-2 border-[#F97316] pl-5 sm:pl-6">
           {t.blog.subtitle}
         </p>
 

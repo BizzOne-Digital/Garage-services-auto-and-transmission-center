@@ -38,7 +38,7 @@ export default function App() {
   }, [isBlogRoute]);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F3F3F3] flex flex-col font-sans selection:bg-[#F5C400] selection:text-[#0A0A0A] relative">
+    <div className="min-h-screen bg-[#0A0A0A] text-[#F3F3F3] flex flex-col font-sans selection:bg-[#F97316] selection:text-[#0A0A0A] relative">
       {/* 1.0 - 1.2s Fast Premium Page Intro Animation */}
       <PageLoader />
 

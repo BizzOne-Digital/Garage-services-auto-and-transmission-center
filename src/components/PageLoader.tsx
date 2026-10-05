@@ -57,7 +57,7 @@ export const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
                   ease: 'easeInOut',
                   repeat: 0,
                 }}
-                className="w-full h-full bg-gradient-to-r from-transparent via-[#F5C400] to-white"
+                className="w-full h-full bg-gradient-to-r from-transparent via-[#F97316] to-white"
               />
             </div>
 
@@ -65,7 +65,7 @@ export const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.4 }}
-              className="text-[11px] font-mono tracking-widest text-[#F5C400] uppercase mt-3"
+              className="text-[11px] font-mono tracking-widest text-[#F97316] uppercase mt-3"
             >
               {t.loader.status}
             </motion.p>

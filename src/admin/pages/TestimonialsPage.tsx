@@ -75,7 +75,7 @@ export const TestimonialsPage: React.FC = () => (
       {
         header: 'Rating',
         render: item => (
-          <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#F5C400]">
+          <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#F97316]">
             <Star className="w-3 h-3 fill-current" />
             {item.rating}
           </span>

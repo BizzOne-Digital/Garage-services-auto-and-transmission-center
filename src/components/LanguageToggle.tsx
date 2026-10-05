@@ -38,8 +38,8 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ className = '', 
               aria-label={option.aria}
               aria-pressed={isActive}
               lang={option.code}
-              className={`${padding} w-10 text-center text-[11px] font-mono font-bold uppercase tracking-widest transition-colors focus:outline-none focus:ring-1 focus:ring-[#F5C400] ${
-                isActive ? 'bg-[#F5C400] text-[#0A0A0A]' : 'text-neutral-400 hover:text-[#F5C400]'
+              className={`${padding} w-10 text-center text-[11px] font-mono font-bold uppercase tracking-widest transition-colors focus:outline-none focus:ring-1 focus:ring-[#F97316] ${
+                isActive ? 'bg-[#F97316] text-[#0A0A0A]' : 'text-neutral-400 hover:text-[#F97316]'
               }`}
             >
               {option.label}

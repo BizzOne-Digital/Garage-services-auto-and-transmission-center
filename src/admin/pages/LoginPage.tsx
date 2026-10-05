@@ -38,9 +38,9 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F3F3F3] font-sans flex items-center justify-center px-4 py-12 relative overflow-hidden selection:bg-[#F5C400] selection:text-[#0A0A0A]">
+    <div className="min-h-screen bg-[#0A0A0A] text-[#F3F3F3] font-sans flex items-center justify-center px-4 py-12 relative overflow-hidden selection:bg-[#F97316] selection:text-[#0A0A0A]">
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[32rem] h-[32rem] bg-[#F5C400]/5 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[32rem] h-[32rem] bg-[#F97316]/5 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 w-full max-w-md">
         <div className="flex flex-col items-center text-center mb-8">
@@ -51,8 +51,8 @@ export const LoginPage: React.FC = () => {
               className="w-14 h-14 rounded-2xl object-contain bg-[#101010] border border-neutral-800 p-2 mb-4"
             />
           )}
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181818] border border-neutral-800 text-[10px] font-mono font-bold uppercase tracking-widest text-[#F5C400] mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F5C400]" />
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181818] border border-neutral-800 text-[10px] font-mono font-bold uppercase tracking-widest text-[#F97316] mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#F97316]" />
             Secure area
           </span>
           <h1 className="font-heading text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
@@ -127,7 +127,7 @@ export const LoginPage: React.FC = () => {
         </form>
 
         <p className="text-center mt-6">
-          <a href="/" className="text-[11px] text-neutral-600 hover:text-[#F5C400] transition-colors">
+          <a href="/" className="text-[11px] text-neutral-600 hover:text-[#F97316] transition-colors">
             ← Back to the website
           </a>
         </p>

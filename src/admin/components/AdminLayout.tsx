@@ -82,7 +82,7 @@ export const AdminLayout: React.FC<{
             className="w-8 h-8 rounded-lg object-contain bg-[#0A0A0A]"
           />
         ) : (
-          <span className="w-8 h-8 rounded-lg bg-[#F5C400] text-[#0A0A0A] font-heading font-black flex items-center justify-center text-sm">
+          <span className="w-8 h-8 rounded-lg bg-[#F97316] text-[#0A0A0A] font-heading font-black flex items-center justify-center text-sm">
             G
           </span>
         )}
@@ -90,7 +90,7 @@ export const AdminLayout: React.FC<{
           <span className="block font-heading text-xs font-bold uppercase tracking-wider text-white truncate">
             {business.shortName || 'Garage Services'}
           </span>
-          <span className="block text-[10px] font-mono uppercase tracking-widest text-[#F5C400]">
+          <span className="block text-[10px] font-mono uppercase tracking-widest text-[#F97316]">
             Admin portal
           </span>
         </span>
@@ -113,7 +113,7 @@ export const AdminLayout: React.FC<{
                       aria-current={active ? 'page' : undefined}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
                         active
-                          ? 'bg-[#F5C400]/10 text-[#F5C400] border border-[#F5C400]/30'
+                          ? 'bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30'
                           : 'text-neutral-400 hover:text-white hover:bg-[#1A1A1A] border border-transparent'
                       }`}
                     >
@@ -131,7 +131,7 @@ export const AdminLayout: React.FC<{
       <div className="px-3 py-4 border-t border-neutral-800 shrink-0">
         <a
           href="/"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-neutral-400 hover:text-[#F5C400] hover:bg-[#1A1A1A] transition-colors"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-neutral-400 hover:text-[#F97316] hover:bg-[#1A1A1A] transition-colors"
         >
           <ExternalLink className="w-4 h-4 shrink-0" />
           View website
@@ -141,7 +141,7 @@ export const AdminLayout: React.FC<{
   );
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F3F3F3] font-sans selection:bg-[#F5C400] selection:text-[#0A0A0A]">
+    <div className="min-h-screen bg-[#0A0A0A] text-[#F3F3F3] font-sans selection:bg-[#F97316] selection:text-[#0A0A0A]">
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 flex-col bg-[#101010] border-r border-neutral-800 z-30">
         {sidebar}
@@ -198,7 +198,7 @@ export const AdminLayout: React.FC<{
                 aria-haspopup="menu"
                 className="flex items-center gap-2 px-2.5 py-2 rounded-xl border border-neutral-800 hover:border-neutral-600 transition-colors"
               >
-                <span className="w-6 h-6 rounded-lg bg-[#F5C400] text-[#0A0A0A] text-[10px] font-black flex items-center justify-center uppercase">
+                <span className="w-6 h-6 rounded-lg bg-[#F97316] text-[#0A0A0A] text-[10px] font-black flex items-center justify-center uppercase">
                   {(admin?.name || admin?.email || 'A').slice(0, 1)}
                 </span>
                 <span className="hidden sm:block text-[11px] font-bold uppercase tracking-wider text-neutral-300 max-w-[10rem] truncate">

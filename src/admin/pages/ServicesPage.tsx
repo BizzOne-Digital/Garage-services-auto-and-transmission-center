@@ -64,7 +64,7 @@ const PreviewList: React.FC<{ label: string; value?: LocalizedList }> = ({ label
             <ul className="space-y-1">
               {(value[lang] ?? []).map((entry, index) => (
                 <li key={index} className="flex gap-2 text-xs text-neutral-300 leading-relaxed">
-                  <span className="text-[#F5C400] shrink-0">·</span>
+                  <span className="text-[#F97316] shrink-0">·</span>
                   <span>{entry}</span>
                 </li>
               ))}
@@ -255,7 +255,7 @@ export const ServicesPage: React.FC = () => {
                             onClick={() => setPreview(service)}
                             title="View details"
                             aria-label={`View ${service.slug}`}
-                            className="p-2 rounded-lg text-neutral-500 hover:text-[#F5C400] hover:bg-[#1A1A1A] transition-colors"
+                            className="p-2 rounded-lg text-neutral-500 hover:text-[#F97316] hover:bg-[#1A1A1A] transition-colors"
                           >
                             <Eye className="w-3.5 h-3.5" />
                           </button>
@@ -345,7 +345,7 @@ export const ServicesPage: React.FC = () => {
                   href={preview.videoUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs text-[#F5C400] hover:underline break-all"
+                  className="text-xs text-[#F97316] hover:underline break-all"
                 >
                   {preview.videoUrl}
                 </a>
